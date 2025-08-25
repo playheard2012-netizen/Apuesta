@@ -10,264 +10,241 @@
             padding: 0;
             box-sizing: border-box;
         }
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: #333;
             min-height: 100vh;
-            padding: 20px;
+            color: #333;
         }
+
         .container {
             max-width: 1400px;
             margin: 0 auto;
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            overflow: hidden;
+            padding: 20px;
         }
+
         .header {
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-            color: white;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
             padding: 30px;
-            text-align: center;
+            margin-bottom: 30px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
         }
+
         .header h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 20px;
             font-size: 2.5em;
-            margin-bottom: 10px;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
-        .header p {
-            font-size: 1.1em;
-            opacity: 0.9;
-        }
-        .controls {
-            padding: 30px;
+
+        .api-config {
             background: #f8f9fa;
-            border-bottom: 1px solid #e9ecef;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-        }
-        .control-group {
-            display: flex;
-            flex-direction: column;
-        }
-        label {
-            font-weight: 600;
-            margin-bottom: 8px;
-            color: #495057;
-        }
-        select, input, button {
-            padding: 12px;
-            border: 2px solid #dee2e6;
+            padding: 20px;
             border-radius: 10px;
-            font-size: 16px;
-            transition: all 0.3s ease;
+            margin-bottom: 20px;
         }
-        select:focus, input:focus {
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+
+        input:focus, select:focus {
             outline: none;
             border-color: #667eea;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
         }
-        .btn-primary {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+
+        .btn {
+            background: linear-gradient(45deg, #667eea, #764ba2);
             color: white;
             border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
             cursor: pointer;
+            font-size: 16px;
             font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            margin: 5px;
         }
-        .btn-primary:hover {
+
+        .btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
-        .btn-export {
-            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
-            color: white;
-            border: none;
-            cursor: pointer;
-            font-weight: 600;
-        }
-        .btn-export:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(40, 167, 69, 0.3);
-        }
-        .loading {
-            display: none;
-            text-align: center;
-            padding: 40px;
-            font-size: 18px;
-            color: #667eea;
-        }
-        .spinner {
-            border: 4px solid #f3f3f3;
-            border-top: 4px solid #667eea;
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            animation: spin 1s linear infinite;
-            margin: 20px auto;
-        }
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        .results {
-            padding: 30px;
-        }
-        .match-analysis {
-            background: white;
-            border-radius: 15px;
-            margin-bottom: 30px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-            border: 1px solid #e9ecef;
-        }
-        .match-header {
-            background: linear-gradient(135deg, #495057 0%, #6c757d 100%);
-            color: white;
-            padding: 20px;
-            text-align: center;
-        }
-        .match-teams {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 1.5em;
-            font-weight: 700;
-        }
-        .vs {
-            font-size: 1.2em;
-            opacity: 0.8;
-        }
-        .stats-grid {
+
+        .leagues-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 20px;
-            padding: 30px;
-        }
-        .stats-section {
-            background: #f8f9fa;
-            border-radius: 12px;
-            padding: 20px;
-            border-left: 5px solid #667eea;
-        }
-        .stats-title {
-            font-size: 1.2em;
-            font-weight: 700;
-            color: #495057;
-            margin-bottom: 15px;
-            text-align: center;
-        }
-        .stat-row {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 10px;
-            padding: 8px 0;
-            border-bottom: 1px solid #dee2e6;
-        }
-        .stat-row:last-child {
-            border-bottom: none;
-        }
-        .stat-label {
-            font-weight: 600;
-            color: #6c757d;
-        }
-        .stat-value {
-            font-weight: 700;
-            color: #495057;
-        }
-        .prediction-box {
-            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
-            color: white;
-            padding: 25px;
-            border-radius: 15px;
-            text-align: center;
             margin: 20px 0;
-            box-shadow: 0 10px 30px rgba(40, 167, 69, 0.3);
         }
-        .prediction-title {
-            font-size: 1.3em;
-            font-weight: 700;
-            margin-bottom: 10px;
-        }
-        .prediction-value {
-            font-size: 2em;
-            font-weight: 900;
-        }
-        .spreadsheet-container {
-            margin-top: 40px;
-            background: white;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-        }
-        .spreadsheet-header {
-            background: linear-gradient(135deg, #6f42c1 0%, #6610f2 100%);
-            color: white;
+
+        .league-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 10px;
             padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .league-card h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        .match-selector {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+        }
+
+        .loading {
             text-align: center;
+            padding: 20px;
+            color: #667eea;
+            font-size: 18px;
         }
-        .table-container {
-            overflow-x: auto;
-            max-height: 600px;
+
+        .data-table {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
         }
+
         table {
             width: 100%;
             border-collapse: collapse;
-            font-size: 14px;
         }
+
         th, td {
-            padding: 12px 8px;
-            text-align: center;
-            border: 1px solid #dee2e6;
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
         }
+
         th {
-            background: #f8f9fa;
-            font-weight: 700;
-            color: #495057;
-            position: sticky;
-            top: 0;
-            z-index: 10;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            font-weight: 600;
         }
-        tr:nth-child(even) {
-            background: #f8f9fa;
-        }
+
         tr:hover {
-            background: #e3f2fd;
+            background: #f8f9fa;
         }
+
+        .statistics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 2em;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 0.9em;
+        }
+
         .error {
-            background: #f8d7da;
-            color: #721c24;
-            padding: 20px;
-            border-radius: 10px;
-            margin: 20px 0;
-            border-left: 5px solid #dc3545;
+            background: #ff6b6b;
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0;
         }
+
         .success {
-            background: #d1ecf1;
-            color: #0c5460;
+            background: #51cf66;
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+        }
+
+        .team-comparison {
+            display: grid;
+            grid-template-columns: 1fr 100px 1fr;
+            gap: 20px;
+            margin: 20px 0;
+            align-items: center;
+        }
+
+        .team-stats {
+            background: white;
             padding: 20px;
             border-radius: 10px;
-            margin: 20px 0;
-            border-left: 5px solid #17a2b8;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
         }
+
+        .vs-badge {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 15px;
+            border-radius: 50%;
+            text-align: center;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+        .export-section {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
         @media (max-width: 768px) {
-            .container {
-                margin: 10px;
-                border-radius: 15px;
-            }
-            .controls {
+            .team-comparison {
                 grid-template-columns: 1fr;
-                padding: 20px;
+                text-align: center;
             }
-            .stats-grid {
-                grid-template-columns: 1fr;
-                padding: 20px;
-            }
-            .header h1 {
-                font-size: 2em;
+            
+            .vs-badge {
+                margin: 10px auto;
+                width: 80px;
+                height: 80px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
             }
         }
     </style>
@@ -276,836 +253,1146 @@
     <div class="container">
         <div class="header">
             <h1>🏆 Análisis de Apuestas Deportivas 2025-2026</h1>
-            <p>Sistema Avanzado de Análisis Estadístico para Múltiples Ligas</p>
-        </div>
-        <div class="controls">
-            <div class="control-group">
-                <label for="league">Liga</label>
-                <select id="league" onchange="loadTeams()">
-                    <option value="">Seleccionar Liga</option>
-                    <optgroup label="América">
-                        <option value="MLS">MLS (Estados Unidos)</option>
-                        <option value="LigaMX">Liga MX (México)</option>
-                        <option value="LigaFPD">Liga FPD (Costa Rica)</option>
-                        <option value="LigaBetPlay">Liga BetPlay (Colombia)</option>
-                        <option value="LigaProEC">Liga Pro (Ecuador)</option>
-                        <option value="Liga1PE">Liga 1 (Perú)</option>
-                        <option value="PrimeraDivisionCL">Primera División (Chile)</option>
-                        <option value="LigaProfesionalAR">Liga Profesional (Argentina)</option>
-                        <option value="Brasileirao">Brasileirão (Brasil)</option>
-                        <option value="PrimeraDivisionUY">Primera División (Uruguay)</option>
-                    </optgroup>
-                    <optgroup label="Europa">
-                        <option value="Allsvenskan">Allsvenskan (Suecia)</option>
-                        <option value="ProLeague">Pro League (Bélgica)</option>
-                        <option value="SuperligaDK">Superliga (Dinamarca)</option>
-                        <option value="Liga1RO">Liga 1 (Rumania)</option>
-                        <option value="Ekstraklasa">Ekstraklasa (Polonia)</option>
-                        <option value="SuperLeagueCH">Super League (Suiza)</option>
-                        <option value="Ligue1">Ligue 1 (Francia)</option>
-                        <option value="LaLiga">La Liga (España)</option>
-                        <option value="SerieA">Serie A (Italia)</option>
-                        <option value="PrimeiraLiga">Primeira Liga (Portugal)</option>
-                        <option value="Eredivisie">Eredivisie (Países Bajos)</option>
-                        <option value="SuperLig">Süper Lig (Turquía)</option>
-                        <option value="PremierLeague">Premier League (Inglaterra)</option>
-                        <option value="Championship">Championship (Inglaterra)</option>
-                        <option value="Premiership">Premiership (Escocia)</option>
-                        <option value="Bundesliga">Bundesliga (Alemania)</option>
-                        <option value="Bundesliga2">2. Bundesliga (Alemania)</option>
-                    </optgroup>
-                </select>
-            </div>
-            <div class="control-group">
-                <label for="season">Temporada</label>
-                <select id="season">
-                    <option value="2025">2025</option>
-                    <option value="2024">2024</option>
-                </select>
-            </div>
-            <div class="control-group">
-                <label for="homeTeam">Equipo Local</label>
-                <select id="homeTeam">
-                    <option value="">Seleccionar equipo local</option>
-                </select>
-            </div>
-            <div class="control-group">
-                <label for="awayTeam">Equipo Visitante</label>
-                <select id="awayTeam">
-                    <option value="">Seleccionar equipo visitante</option>
-                </select>
-            </div>
-            <div class="control-group">
-                <button class="btn-primary" onclick="analyzeMatch()">🔍 Analizar Partido</button>
-            </div>
-            <div class="control-group">
-                <button class="btn-export" onclick="exportToExcel()">📊 Exportar a Excel</button>
-            </div>
-            <div class="control-group">
-                <button onclick="showPricingInfo()" style="background: linear-gradient(135deg, #ffc107 0%, #ff8f00 100%); color: white; border: none; cursor: pointer; padding: 12px; border-radius: 10px; font-weight: 600;">💰 Planes y Precios</button>
+            <div class="api-config">
+                <div class="form-group">
+                    <label for="apiProvider">Proveedor de API:</label>
+                    <select id="apiProvider" onchange="updateApiConfig()">
+                        <option value="api-football">API-Football (Gratis/Premium)</option>
+                        <option value="football-data">Football-Data.org (Gratis/Premium)</option>
+                        <option value="rapidapi-football">RapidAPI Football (Premium)</option>
+                        <option value="sportmonks">SportMonks API (Premium)</option>
+                        <option value="the-odds-api">The Odds API (Gratis/Premium)</option>
+                        <option value="api-sports">API-Sports.io (Premium)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="apiPlan">Plan de API:</label>
+                    <select id="apiPlan" onchange="updatePlanLimits()">
+                        <option value="free">Gratuito</option>
+                        <option value="basic">Básico</option>
+                        <option value="pro">Profesional</option>
+                        <option value="ultra">Ultra</option>
+                        <option value="mega">Mega</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="apiKey">API Key:</label>
+                    <input type="password" id="apiKey" placeholder="Ingresa tu API Key">
+                    <div id="apiInfo" style="margin-top: 10px; padding: 10px; background: #f0f8ff; border-radius: 5px;">
+                        <small id="planDetails">Selecciona un proveedor para ver los detalles del plan</small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="apiEndpoint">Endpoint Base (Opcional - para APIs personalizadas):</label>
+                    <input type="text" id="apiEndpoint" placeholder="https://api.ejemplo.com/v1">
+                </div>
+                <button class="btn" onclick="saveApiKey()">Guardar Configuración</button>
+                <button class="btn" onclick="testConnection()">Probar Conexión</button>
+                <button class="btn" onclick="showApiLimits()">Ver Límites</button>
+                <button class="btn" onclick="exportApiConfig()">💾 Exportar Config</button>
+                <button class="btn" onclick="importApiConfig()">📂 Importar Config</button>
+                <button class="btn" onclick="recommendUpgrade()">🚀 Recomendar Plan</button>
             </div>
         </div>
-        <div class="loading" id="loading">
-            <div class="spinner"></div>
-            <p>Cargando datos...</p>
+
+        <div class="match-selector">
+            <h2>Seleccionar Partido</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+                <div class="form-group">
+                    <label for="leagueSelect">Liga:</label>
+                    <select id="leagueSelect" onchange="loadTeams()">
+                        <option value="">Seleccionar Liga</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="homeTeam">Equipo Local:</label>
+                    <select id="homeTeam">
+                        <option value="">Seleccionar Equipo Local</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="awayTeam">Equipo Visitante:</label>
+                    <select id="awayTeam">
+                        <option value="">Seleccionar Equipo Visitante</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="season">Temporada:</label>
+                    <select id="season">
+                        <option value="2025">2025</option>
+                        <option value="2024">2024</option>
+                    </select>
+                </div>
+            </div>
+            <button class="btn" onclick="analyzeMatch()">Analizar Partido</button>
+            <button class="btn" onclick="loadLiveMatches()">Partidos en Vivo</button>
         </div>
-        <div class="results" id="results"></div>
-        <div class="spreadsheet-container" id="spreadsheetContainer" style="display: none;">
-            <div class="spreadsheet-header">
-                <h2>📊 Hoja de Cálculo de Estadísticas</h2>
-            </div>
-            <div class="table-container">
-                <table id="statsTable">
-                    <thead id="tableHeader"></thead>
-                    <tbody id="tableBody"></tbody>
-                </table>
-            </div>
+
+        <div id="results"></div>
+
+        <div class="export-section">
+            <h3>Exportar Datos</h3>
+            <button class="btn" onclick="exportToExcel()">📊 Exportar a Excel</button>
+            <button class="btn" onclick="exportToCSV()">📋 Exportar a CSV</button>
+            <button class="btn" onclick="generateReport()">📑 Generar Reporte PDF</button>
         </div>
     </div>
-    <script>
-        let currentData = null;
 
-        // Datos simulados de equipos por liga
-        const mockTeams = {
-            "MLS": ["LA Galaxy", "Seattle Sounders", "New York City FC", "Atlanta United", "LAFC", "Portland Timbers", "New England Revolution", "Sporting Kansas City", "D.C. United", "Orlando City SC", "New York Red Bulls", "Austin FC", "Colorado Rapids", "FC Dallas", "Houston Dynamo", "Inter Miami CF", "Minnesota United", "Nashville SC", "Philadelphia Union", "Real Salt Lake", "San Jose Earthquakes", "Columbus Crew", "Charlotte FC", "CF Montréal", "Toronto FC", "Chicago Fire", "FC Cincinnati", "Vancouver Whitecaps", "St. Louis City SC"],
-            "LigaMX": ["América", "Chivas", "Tigres", "Monterrey", "Pumas", "Toluca", "Cruz Azul", "Santos Laguna", "Puebla", "Pachuca", "León", "Necaxa", "Atlas", "Mazatlán", "Querétaro", "San Luis", "Tijuana", "Juárez", "Monarcas Morelia", "Atlético San Luis"],
-            "LigaFPD": ["LD Alajuelense", "CS Herediano", "Deportivo Saprissa", "CS Cartaginés", "AD San Carlos", "ADR Jicaral", "Municipal Pérez Zeledón", "Municipal Grecia", "Sporting FC", "AD Guanacasteca", "Puntarenas FC", "ADR Jicaral"],
-            "LigaBetPlay": ["Millonarios", "Atlético Nacional", "Deportivo Cali", "Santa Fe", "Junior", "América de Cali", "Deportes Tolima", "La Equidad", "Once Caldas", "Envigado FC", "Patriotas", "Jaguares", "Alianza Petrolera", "Deportivo Pasto", "Atlético Bucaramanga", "Rionegro Águilas", "Boyacá Chicó", "Deportivo Pereira", "Atlético Huila", "Cortuluá"],
-            "LigaProEC": ["Barcelona SC", "LDU Quito", "Emelec", "Independiente del Valle", "Aucas", "Deportivo Cuenca", "Universidad Católica", "El Nacional", "Técnico Universitario", "Mushuc Runa", "Delfín SC", "Guayaquil City", "Orense SC", "Macará", "Gualaceo SC", "9 de Octubre", "Cumbayá FC", "Imbabura SC"],
-            "Liga1PE": ["Alianza Lima", "Universitario", "Sporting Cristal", "Melgar", "Cienciano", "Sport Boys", "Universidad César Vallejo", "Deportivo Municipal", "Binacional", "Carlos A. Mannucci", "UTC", "Ayacucho FC", "Sport Huancayo", "Cusco FC", "Alianza Atlético", "Deportivo Coopsol", "Pirata FC", "Academia Cantolao", "Comerciantes Unidos", "ADT"],
-            "PrimeraDivisionCL": ["Colo-Colo", "Universidad Católica", "Universidad de Chile", "Palestino", "O'Higgins", "Unión Española", "Audax Italiano", "Huachipato", "Coquimbo Unido", "Everton", "Deportes La Serena", "Ñublense", "Deportes Antofagasta", "Deportes Iquique", "Curicó Unido", "Deportes Copiapó"],
-            "LigaProfesionalAR": ["Boca Juniors", "River Plate", "Racing Club", "Independiente", "San Lorenzo", "Vélez Sarsfield", "Argentinos Juniors", "Estudiantes", "Lanús", "Talleres", "Rosario Central", "Newell's Old Boys", "Gimnasia y Esgrima LP", "Huracán", "Banfield", "Central Córdoba", "Arsenal", "Platense", "Barracas Central", "Sarmiento", "Defensa y Justicia", "Tigre", "Unión", "Godoy Cruz", "Patronato", "Instituto"],
-            "Brasileirao": ["Flamengo", "Palmeiras", "São Paulo", "Corinthians", "Fluminense", "Vasco da Gama", "Atlético Mineiro", "Santos", "Internacional", "Grêmio", "Botafogo", "Cruzeiro", "Athletico Paranaense", "Red Bull Bragantino", "Fortaleza", "Cuiabá", "Goiás", "América Mineiro", "Coritiba", "Bahia"],
-            "PrimeraDivisionUY": ["Peñarol", "Nacional", "Liverpool", "Defensor Sporting", "Wanderers", "Danubio", "Cerro Largo", "Fénix", "River Plate", "Deportivo Maldonado", "Boston River", "Cerrito", "Rentistas", "Albion", "La Luz", "Plaza Colonia"],
-            "Allsvenskan": ["Malmö FF", "AIK", "Djurgårdens IF", "Hammarby IF", "IFK Göteborg", "IF Elfsborg", "IFK Norrköping", "IK Sirius", "Häcken", "Värnamo", "Kalmar FF", "Degerfors IF", "Mjällby AIF", "Helsingborgs IF", "Varbergs BoIS", "Halmia"],
-            "ProLeague": ["Club Brugge", "RSC Anderlecht", "Royal Antwerp", "KRC Genk", "Standard Liège", "KAA Gent", "Union Saint-Gilloise", "OH Leuven", "Cercle Brugge", "KV Mechelen", "KV Oostende", "RFC Seraing", "SV Zulte Waregem", "KAS Eupen", "RWD Molenbeek", "Sporting Charleroi"],
-            "SuperligaDK": ["FC Copenhagen", "Brøndby IF", "FC Midtjylland", "AGF Aarhus", "FC Nordsjælland", "Randers FC", "Odense BK", "Viborg FF", "Silkeborg IF", "AaB", "Lyngby BK", "Hvidovre IF"],
-            "Liga1RO": ["FCSB", "CFR Cluj", "Universitatea Craiova", "Rapid București", "Sepsi OSK", "FCV Farul Constanța", "FC U Craiova 1948", "FC Hermannstadt", "FC Argeș", "FC Voluntari", "FC UTA Arad", "FC Petrolul Ploiești", "FC Dinamo București", "FC Politehnica Iași", "FC Chindia Târgoviște", "FC Mioveni"],
-            "Ekstraklasa": ["Legia Warsaw", "Lech Poznań", "Pogoń Szczecin", "Raków Częstochowa", "Śląsk Wrocław", "Piast Gliwice", "Lechia Gdańsk", "Warta Poznań", "Jagiellonia Białystok", "Cracovia", "Wisła Płock", "Górnik Zabrze", "Zagłębie Lubin", "Radomiak Radom", "Wisła Kraków", "Bruk-Bet Termalica Nieciecza", "Miedź Legnica", "Korona Kielce"],
-            "SuperLeagueCH": ["Young Boys", "Servette FC", "FC Basel", "FC Zürich", "FC Lugano", "FC St. Gallen", "FC Luzern", "Grasshopper Club Zürich", "FC Sion", "FC Lausanne-Sport", "FC Winterthur", "FC Stade Nyonnais"],
-            "Ligue1": ["Paris Saint-Germain", "Olympique de Marseille", "AS Monaco", "OGC Nice", "Olympique Lyonnais", "Stade Rennais", "LOSC Lille", "RC Lens", "FC Nantes", "Stade de Reims", "Montpellier HSC", "RC Strasbourg", "FC Lorient", "Stade Brestois", "Toulouse FC", "FC Metz", "Clermont Foot", "Le Havre AC"],
-            "LaLiga": ["Real Madrid", "FC Barcelona", "Atlético Madrid", "Real Sociedad", "Villarreal CF", "Real Betis", "Athletic Club", "Sevilla FC", "Girona FC", "Rayo Vallecano", "CA Osasuna", "Valencia CF", "RCD Mallorca", "Cádiz CF", "UD Almería", "Getafe CF", "Celta de Vigo", "Granada CF", "UD Las Palmas", "Deportivo Alavés"],
-            "SerieA": ["Inter Milan", "AC Milan", "Juventus", "Napoli", "Roma", "Lazio", "Atalanta", "Fiorentina", "Torino", "Bologna", "Sassuolo", "Udinese", "Monza", "Empoli", "Hellas Verona", "Lecce", "Salernitana", "Cremonese", "Spezia", "Sampdoria"],
-            "PrimeiraLiga": ["Benfica", "Porto", "Sporting CP", "SC Braga", "Vitória SC", "FC Arouca", "Boavista FC", "Vitória de Guimarães", "Moreirense FC", "Rio Ave FC", "GD Chaves", "FC Famalicão", "GD Estoril Praia", "FC Paços de Ferreira", "CS Marítimo", "FC Vizela", "Portimonense SC", "Casa Pia AC"],
-            "Eredivisie": ["Ajax", "PSV Eindhoven", "Feyenoord", "AZ Alkmaar", "Twente", "PEC Zwolle", "Vitesse", "Utrecht", "Heerenveen", "Groningen", "Sparta Rotterdam", "Fortuna Sittard", "NEC Nijmegen", "Cambuur", "Go Ahead Eagles", "Excelsior", "Volendam", "Emmen"],
-            "SuperLig": ["Galatasaray", "Fenerbahçe", "Beşiktaş", "Trabzonspor", "Başakşehir", "Adana Demirspor", "Alanyaspor", "Sivasspor", "Konyaspor", "Kasımpaşa", "Gaziantep FK", "Antalyaspor", "Kayserispor", "Hatayspor", "Giresunspor", "Ümraniyespor", "İstanbulspor", "Ankaragücü"],
-            "PremierLeague": ["Manchester City", "Arsenal", "Liverpool", "Manchester United", "Chelsea", "Tottenham Hotspur", "Newcastle United", "Aston Villa", "Brighton & Hove Albion", "Brentford", "Fulham", "Crystal Palace", "Wolverhampton Wanderers", "West Ham United", "Bournemouth", "Nottingham Forest", "Everton", "Luton Town", "Burnley", "Sheffield United"],
-            "Championship": ["Leicester City", "Leeds United", "Ipswich Town", "Southampton", "West Bromwich Albion", "Norwich City", "Coventry City", "Sunderland", "Cardiff City", "Preston North End", "Middlesbrough", "Hull City", "Blackburn Rovers", "Watford", "Swansea City", "Queens Park Rangers", "Millwall", "Birmingham City", "Rotherham United", "Sheffield Wednesday", "Stoke City", "Bristol City", "Plymouth Argyle", "Huddersfield Town"],
-            "Premiership": ["Celtic", "Rangers", "Heart of Midlothian", "Aberdeen", "Hibernian", "St Mirren", "Motherwell", "Dundee FC", "Livingston", "Kilmarnock", "St Johnstone", "Ross County"],
-            "Bundesliga": ["Bayern Munich", "Bayer Leverkusen", "Borussia Dortmund", "RB Leipzig", "VfB Stuttgart", "Eintracht Frankfurt", "TSG Hoffenheim", "SC Freiburg", "VfL Wolfsburg", "Borussia Mönchengladbach", "1. FC Union Berlin", "1. FSV Mainz 05", "1. FC Köln", "FC Augsburg", "SV Werder Bremen", "VfL Bochum", "Hertha BSC", "FC Schalke 04"],
-            "Bundesliga2": ["1. FC Kaiserslautern", "Hamburger SV", "Fortuna Düsseldorf", "1. FC Nürnberg", "SC Paderborn 07", "Holstein Kiel", "Hannover 96", "Karlsruher SC", "1. FC Magdeburg", "Eintracht Braunschweig", "SV Elversberg", "VfL Osnabrück", "SpVgg Greuther Fürth", "1. FC Heidenheim", "Arminia Bielefeld", "SV Sandhausen", "SSV Jahn Regensburg", "Hansa Rostock"]
+    <script>
+        // Configuración de ligas con sus IDs de la API
+        const LEAGUES = {
+            // América
+            'MLS': { id: 253, country: 'USA', name: 'Major League Soccer' },
+            'Liga MX': { id: 262, country: 'Mexico', name: 'Liga MX' },
+            'Costa Rica': { id: 159, country: 'Costa Rica', name: 'Primera División' },
+            'Colombia': { id: 239, country: 'Colombia', name: 'Primera A' },
+            'Ecuador': { id: 242, country: 'Ecuador', name: 'Serie A' },
+            'Peru': { id: 281, country: 'Peru', name: 'Primera División' },
+            'Chile': { id: 265, country: 'Chile', name: 'Primera División' },
+            'Argentina': { id: 128, country: 'Argentina', name: 'Liga Profesional' },
+            'Brasil': { id: 71, country: 'Brazil', name: 'Serie A' },
+            'Uruguay': { id: 218, country: 'Uruguay', name: 'Primera División' },
+            
+            // Europa
+            'Suecia': { id: 113, country: 'Sweden', name: 'Allsvenskan' },
+            'Bélgica': { id: 144, country: 'Belgium', name: 'First Division A' },
+            'Dinamarca': { id: 119, country: 'Denmark', name: 'Superliga' },
+            'Rumania': { id: 283, country: 'Romania', name: 'Liga 1' },
+            'Polonia': { id: 106, country: 'Poland', name: 'Ekstraklasa' },
+            'Suiza': { id: 207, country: 'Switzerland', name: 'Super League' },
+            'Francia': { id: 61, country: 'France', name: 'Ligue 1' },
+            'España': { id: 140, country: 'Spain', name: 'La Liga' },
+            'Italia': { id: 135, country: 'Italy', name: 'Serie A' },
+            'Portugal': { id: 94, country: 'Portugal', name: 'Primeira Liga' },
+            'Países Bajos': { id: 88, country: 'Netherlands', name: 'Eredivisie' },
+            'Turquía': { id: 203, country: 'Turkey', name: 'Super Lig' },
+            'Premier League': { id: 39, country: 'England', name: 'Premier League' },
+            'Championship': { id: 40, country: 'England', name: 'Championship' },
+            'Escocia': { id: 179, country: 'Scotland', name: 'Premiership' },
+            'Bundesliga': { id: 78, country: 'Germany', name: 'Bundesliga' },
+            'Bundesliga 2': { id: 79, country: 'Germany', name: '2. Bundesliga' }
         };
 
-        // Función para mostrar/ocultar loading
-        function showLoading(show) {
-            document.getElementById('loading').style.display = show ? 'block' : 'none';
-        }
+        let API_KEY = '';
+        let API_PROVIDER = 'api-football';
+        let API_PLAN = 'free';
+        let API_ENDPOINT = '';
+        let matchData = {};
+        let analysisData = {};
+        let requestCount = 0;
+        let dailyLimit = 100;
 
-        // Función para mostrar errores
-        function showError(message) {
-            const resultsDiv = document.getElementById('results');
-            resultsDiv.innerHTML = `<div class="error">❌ ${message}</div>`;
-        }
-
-        // Función para mostrar mensajes de éxito
-        function showSuccess(message) {
-            const resultsDiv = document.getElementById('results');
-            const currentContent = resultsDiv.innerHTML;
-            resultsDiv.innerHTML = `<div class="success">✅ ${message}</div>` + currentContent;
-            setTimeout(() => {
-                const successDiv = resultsDiv.querySelector('.success');
-                if (successDiv) {
-                    successDiv.remove();
+        // Configuración de APIs y planes
+        const API_CONFIGS = {
+            'api-football': {
+                name: 'API-Football',
+                baseUrl: 'https://v3.football.api-sports.io',
+                website: 'https://www.api-football.com/',
+                plans: {
+                    free: { requests: 100, price: 'Gratis', features: 'Datos básicos, 100 requests/día' },
+                    basic: { requests: 1000, price: '$5/mes', features: 'Datos completos, 1,000 requests/día' },
+                    pro: { requests: 3000, price: '$15/mes', features: 'Datos avanzados, 3,000 requests/día' },
+                    ultra: { requests: 10000, price: '$30/mes', features: 'Datos premium, 10,000 requests/día' },
+                    mega: { requests: 50000, price: '$100/mes', features: 'Datos ilimitados, 50,000 requests/día' }
+                },
+                headers: {
+                    'X-RapidAPI-Key': '',
+                    'X-RapidAPI-Host': 'v3.football.api-sports.io'
                 }
-            }, 5000);
-        }
-
-        // Función para mostrar información de precios
-        function showPricingInfo() {
-            const modal = document.createElement('div');
-            modal.style.cssText = `
-                position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-                background: rgba(0,0,0,0.8); z-index: 10000; display: flex;
-                align-items: center; justify-content: center; padding: 20px;
-            `;
-
-            modal.innerHTML = `
-                <div style="
-                    background: white; border-radius: 20px; padding: 40px;
-                    max-width: 800px; width: 100%; max-height: 80vh; overflow-y: auto;
-                    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-                ">
-                    <div style="text-align: center; margin-bottom: 30px;">
-                        <h2 style="color: #2a5298; margin-bottom: 10px;">📊 API-Football - Planes y Precios 2025</h2>
-                        <p style="color: #6c757d;">Obtén datos reales de fútbol profesional</p>
-                    </div>
-
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-bottom: 30px;">
-                        <div style="border: 2px solid #28a745; border-radius: 15px; padding: 25px; text-align: center;">
-                            <h3 style="color: #28a745; margin-bottom: 15px;">🆓 GRATUITO</h3>
-                            <div style="font-size: 2em; font-weight: bold; color: #28a745; margin-bottom: 10px;">$0</div>
-                            <div style="color: #6c757d; margin-bottom: 20px;">por mes</div>
-                            <ul style="text-align: left; padding-left: 20px; color: #495057;">
-                                <li><strong>100 requests/día</strong></li>
-                                <li>Datos de partidos en vivo</li>
-                                <li>Estadísticas básicas</li>
-                                <li>Historial limitado</li>
-                                <li>Ideal para probar</li>
-                            </ul>
-                        </div>
-
-                        <div style="border: 2px solid #667eea; border-radius: 15px; padding: 25px; text-align: center; background: linear-gradient(135deg, #667eea22, #764ba222);">
-                            <h3 style="color: #667eea; margin-bottom: 15px;">⭐ MEGA</h3>
-                            <div style="font-size: 2em; font-weight: bold; color: #667eea; margin-bottom: 10px;">$13.99</div>
-                            <div style="color: #6c757d; margin-bottom: 20px;">por mes</div>
-                            <ul style="text-align: left; padding-left: 20px; color: #495057;">
-                                <li><strong>10,000 requests/día</strong></li>
-                                <li>Todas las ligas mundiales</li>
-                                <li>Estadísticas avanzadas</li>
-                                <li>Historial completo</li>
-                                <li>Soporte prioritario</li>
-                            </ul>
-                        </div>
-
-                        <div style="border: 2px solid #ffc107; border-radius: 15px; padding: 25px; text-align: center;">
-                            <h3 style="color: #e68900; margin-bottom: 15px;">🏆 ULTRA</h3>
-                            <div style="font-size: 2em; font-weight: bold; color: #e68900; margin-bottom: 10px;">$27.99</div>
-                            <div style="color: #6c757d; margin-bottom: 20px;">por mes</div>
-                            <ul style="text-align: left; padding-left: 20px; color: #495057;">
-                                <li><strong>100,000 requests/día</strong></li>
-                                <li>Acceso ilimitado</li>
-                                <li>Datos en tiempo real</li>
-                                <li>API premium features</li>
-                                <li>Soporte 24/7</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div style="background: #e3f2fd; padding: 20px; border-radius: 15px; margin-bottom: 20px;">
-                        <h4 style="color: #1565c0; margin-bottom: 15px;">🚀 Cómo obtener tu API Key:</h4>
-                        <ol style="color: #495057; padding-left: 20px;">
-                            <li>Ve a <strong>api-football.com</strong></li>
-                            <li>Crea una cuenta gratuita</li>
-                            <li>Ve a tu dashboard</li>
-                            <li>Copia tu API Key</li>
-                            <li>Pégala en el campo correspondiente arriba</li>
-                        </ol>
-                    </div>
-
-                    <div style="text-align: center;">
-                        <button onclick="window.open('https://api-football.com', '_blank')" style="
-                            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-                            color: white; border: none; padding: 15px 30px;
-                            border-radius: 25px; font-weight: 600; cursor: pointer;
-                        ">Obtener API Key</button>
-                        <button onclick="this.parentElement.parentElement.parentElement.remove()" style="
-                            margin-left: 15px; background: #f8f9fa; color: #6c757d;
-                            border: 2px solid #dee2e6; padding: 15px 30px; border-radius: 25px;
-                            font-weight: 600; cursor: pointer;
-                        ">Cerrar</button>
-                    </div>
-                </div>
-            `;
-
-            document.body.appendChild(modal);
-        }
-
-        // Función para cargar equipos
-        function loadTeams() {
-            const leagueId = document.getElementById('league').value;
-            const homeSelect = document.getElementById('homeTeam');
-            const awaySelect = document.getElementById('awayTeam');
-
-            if (!leagueId) {
-                showError('Por favor selecciona una liga.');
-                return;
-            }
-
-            showLoading(true);
-
-            // Simular carga de equipos
-            setTimeout(() => {
-                try {
-                    if (!mockTeams[leagueId]) {
-                        throw new Error('No se encontraron equipos para esta liga.');
-                    }
-
-                    homeSelect.innerHTML = '<option value="">Seleccionar equipo local</option>';
-                    awaySelect.innerHTML = '<option value="">Seleccionar equipo visitante</option>';
-
-                    mockTeams[leagueId].forEach(team => {
-                        const option = `<option value="${team}">${team}</option>`;
-                        homeSelect.innerHTML += option;
-                        awaySelect.innerHTML += option;
-                    });
-
-                    showSuccess(`${mockTeams[leagueId].length} equipos cargados exitosamente.`);
-                } catch (error) {
-                    homeSelect.innerHTML = '<option value="">Error cargando equipos</option>';
-                    awaySelect.innerHTML = '<option value="">Error cargando equipos</option>';
-                    showError(error.message);
-                } finally {
-                    showLoading(false);
+            },
+            'football-data': {
+                name: 'Football-Data.org',
+                baseUrl: 'https://api.football-data.org/v4',
+                website: 'https://www.football-data.org/',
+                plans: {
+                    free: { requests: 10, price: 'Gratis', features: 'Datos limitados, 10 requests/min' },
+                    basic: { requests: 100, price: '$12/mes', features: 'Más competiciones, 100 requests/min' },
+                    pro: { requests: 500, price: '$50/mes', features: 'Datos completos, 500 requests/min' }
+                },
+                headers: {
+                    'X-Auth-Token': ''
                 }
-            }, 800);
+            },
+            'rapidapi-football': {
+                name: 'RapidAPI Football',
+                baseUrl: 'https://api-football-v1.p.rapidapi.com/v3',
+                website: 'https://rapidapi.com/api-sports/api/api-football/',
+                plans: {
+                    basic: { requests: 500, price: '$10/mes', features: 'Datos básicos, 500 requests/día' },
+                    pro: { requests: 2000, price: '$25/mes', features: 'Datos avanzados, 2,000 requests/día' },
+                    ultra: { requests: 10000, price: '$60/mes', features: 'Datos premium, 10,000 requests/día' }
+                },
+                headers: {
+                    'X-RapidAPI-Key': '',
+                    'X-RapidAPI-Host': 'api-football-v1.p.rapidapi.com'
+                }
+            },
+            'sportmonks': {
+                name: 'SportMonks API',
+                baseUrl: 'https://api.sportmonks.com/v3/football',
+                website: 'https://www.sportmonks.com/',
+                plans: {
+                    basic: { requests: 1000, price: '$15/mes', features: 'Datos básicos, 1,000 requests/día' },
+                    pro: { requests: 5000, price: '$50/mes', features: 'Datos completos, 5,000 requests/día' },
+                    ultra: { requests: 20000, price: '$150/mes', features: 'Datos premium, 20,000 requests/día' }
+                },
+                headers: {
+                    'Authorization': ''
+                }
+            },
+            'the-odds-api': {
+                name: 'The Odds API',
+                baseUrl: 'https://api.the-odds-api.com/v4/sports',
+                website: 'https://the-odds-api.com/',
+                plans: {
+                    free: { requests: 500, price: 'Gratis', features: 'Cuotas básicas, 500 requests/mes' },
+                    basic: { requests: 2000, price: '$10/mes', features: 'Más mercados, 2,000 requests/mes' },
+                    pro: { requests: 10000, price: '$40/mes', features: 'Datos completos, 10,000 requests/mes' }
+                },
+                headers: {
+                    'X-API-Key': ''
+                }
+            },
+            'api-sports': {
+                name: 'API-Sports.io',
+                baseUrl: 'https://api.api-sports.io/football',
+                website: 'https://api-sports.io/',
+                plans: {
+                    basic: { requests: 1000, price: '$8/mes', features: 'Datos básicos, 1,000 requests/día' },
+                    pro: { requests: 5000, price: '$25/mes', features: 'Datos avanzados, 5,000 requests/día' },
+                    ultra: { requests: 15000, price: '$75/mes', features: 'Datos premium, 15,000 requests/día' }
+                },
+                headers: {
+                    'X-API-Key': ''
+                }
+            }
+        };
+
+        // Actualizar configuración de API
+        function updateApiConfig() {
+            const provider = document.getElementById('apiProvider').value;
+            API_PROVIDER = provider;
+            
+            const planSelect = document.getElementById('apiPlan');
+            planSelect.innerHTML = '';
+            
+            Object.keys(API_CONFIGS[provider].plans).forEach(plan => {
+                const option = document.createElement('option');
+                option.value = plan;
+                option.textContent = plan.charAt(0).toUpperCase() + plan.slice(1);
+                planSelect.appendChild(option);
+            });
+            
+            updatePlanLimits();
         }
 
-        // Función para analizar partido
-        async function analyzeMatch() {
-            const homeTeam = document.getElementById('homeTeam').value;
-            const awayTeam = document.getElementById('awayTeam').value;
-            const league = document.getElementById('league').selectedOptions[0].text;
-            const season = document.getElementById('season').value;
+        // Actualizar límites del plan
+        function updatePlanLimits() {
+            const provider = document.getElementById('apiProvider').value;
+            const plan = document.getElementById('apiPlan').value;
+            API_PLAN = plan;
+            
+            const config = API_CONFIGS[provider];
+            const planInfo = config.plans[plan];
+            
+            if (planInfo) {
+                dailyLimit = planInfo.requests;
+                document.getElementById('planDetails').innerHTML = `
+                    <strong>${config.name} - Plan ${plan.charAt(0).toUpperCase() + plan.slice(1)}</strong><br>
+                    📊 Requests: ${planInfo.requests}/día<br>
+                    💰 Precio: ${planInfo.price}<br>
+                    ✨ Características: ${planInfo.features}<br>
+                    🔗 <a href="${config.website}" target="_blank">Obtener API Key</a>
+                `;
+            }
+        }
 
-            if (!homeTeam || !awayTeam) {
-                showError('Por favor selecciona ambos equipos.');
-                return;
+        // Mostrar límites actuales
+        function showApiLimits() {
+            const provider = document.getElementById('apiProvider').value;
+            const plan = document.getElementById('apiPlan').value;
+            const config = API_CONFIGS[provider];
+            const planInfo = config.plans[plan];
+            
+            const usagePercentage = ((requestCount / dailyLimit) * 100).toFixed(1);
+            
+            showMessage(`
+                📊 Límites de API - ${config.name}:
+                • Plan: ${plan.toUpperCase()}
+                • Usado: ${requestCount}/${dailyLimit} requests (${usagePercentage}%)
+                • Restante: ${dailyLimit - requestCount} requests
+                • Precio: ${planInfo.price}
+            `, 'success');
+        }
+
+        // Realizar petición a API con manejo de diferentes proveedores
+        async function makeApiRequest(endpoint, params = {}) {
+            if (requestCount >= dailyLimit) {
+                throw new Error(`Límite de requests alcanzado (${dailyLimit}/día). Considera upgradar tu plan.`);
             }
 
-            if (homeTeam === awayTeam) {
-                showError('No puedes seleccionar el mismo equipo como local y visitante.');
-                return;
+            const provider = API_PROVIDER;
+            const config = API_CONFIGS[provider];
+            let url, headers;
+
+            // Configurar URL y headers según el proveedor
+            switch (provider) {
+                case 'api-football':
+                    url = `${config.baseUrl}${endpoint}`;
+                    headers = {
+                        'X-RapidAPI-Key': API_KEY,
+                        'X-RapidAPI-Host': 'v3.football.api-sports.io'
+                    };
+                    break;
+                
+                case 'football-data':
+                    url = `${config.baseUrl}${endpoint}`;
+                    headers = {
+                        'X-Auth-Token': API_KEY
+                    };
+                    break;
+                
+                case 'rapidapi-football':
+                    url = `${config.baseUrl}${endpoint}`;
+                    headers = {
+                        'X-RapidAPI-Key': API_KEY,
+                        'X-RapidAPI-Host': 'api-football-v1.p.rapidapi.com'
+                    };
+                    break;
+                
+                case 'sportmonks':
+                    url = `${config.baseUrl}${endpoint}`;
+                    headers = {
+                        'Authorization': `Bearer ${API_KEY}`
+                    };
+                    break;
+                
+                case 'the-odds-api':
+                    url = `${config.baseUrl}${endpoint}`;
+                    headers = {
+                        'X-API-Key': API_KEY
+                    };
+                    break;
+                
+                case 'api-sports':
+                    url = `${config.baseUrl}${endpoint}`;
+                    headers = {
+                        'X-API-Key': API_KEY
+                    };
+                    break;
+                
+                default:
+                    // API personalizada
+                    url = `${API_ENDPOINT || config.baseUrl}${endpoint}`;
+                    headers = {
+                        'Authorization': `Bearer ${API_KEY}`,
+                        'X-API-Key': API_KEY
+                    };
             }
 
-            showLoading(true);
-            clearResults();
+            // Agregar parámetros a la URL
+            if (Object.keys(params).length > 0) {
+                const urlParams = new URLSearchParams(params);
+                url += (url.includes('?') ? '&' : '?') + urlParams.toString();
+            }
+
+            const response = await fetch(url, { headers });
+            requestCount++;
+            
+            if (!response.ok) {
+                throw new Error(`Error ${response.status}: ${response.statusText}`);
+            }
+
+            return await response.json();
+        }
+
+        // Cargar ligas al inicializar
+        function initializeApp() {
+            const leagueSelect = document.getElementById('leagueSelect');
+            Object.keys(LEAGUES).forEach(league => {
+                const option = document.createElement('option');
+                option.value = league;
+                option.textContent = `${league} (${LEAGUES[league].country})`;
+                leagueSelect.appendChild(option);
+            });
+        }
+
+        // Guardar configuración de API
+        function saveApiKey() {
+            const apiKey = document.getElementById('apiKey').value.trim();
+            const provider = document.getElementById('apiProvider').value;
+            const plan = document.getElementById('apiPlan').value;
+            const endpoint = document.getElementById('apiEndpoint').value.trim();
+            
+            if (apiKey) {
+                API_KEY = apiKey;
+                API_PROVIDER = provider;
+                API_PLAN = plan;
+                API_ENDPOINT = endpoint;
+                
+                const config = API_CONFIGS[provider];
+                const planInfo = config.plans[plan];
+                dailyLimit = planInfo ? planInfo.requests : 100;
+                requestCount = 0; // Reset counter
+                
+                showMessage(`Configuración guardada: ${config.name} - Plan ${plan.toUpperCase()}`, 'success');
+            } else {
+                showMessage('Por favor ingresa una API Key válida', 'error');
+            }
+        }
+
+        // Probar conexión con diferentes APIs
+        async function testConnection() {
+            if (!API_KEY) {
+                showMessage('Por favor configura tu API Key primero', 'error');
+                return;
+            }
 
             try {
-                // Simular análisis
-                await new Promise(resolve => setTimeout(resolve, 1200));
+                showMessage('Probando conexión...', 'loading');
+                let data;
 
-                // Datos simulados para el análisis
-                currentData = {
-                    homeTeam: {
-                        name: homeTeam,
-                        averagesGeneral: {
-                            goals_for: Math.random() * 2 + 1,
-                            goals_against: Math.random() * 1.5,
-                            shots_total: Math.random() * 5 + 10,
-                            shots_on_goal: Math.random() * 3 + 4,
-                            corner_kicks: Math.random() * 3 + 4,
-                            yellow_cards: Math.random() * 2 + 1,
-                            fouls: Math.random() * 5 + 10,
-                            offsides: Math.random() * 2 + 1,
-                            matches_analyzed: 10
-                        },
-                        averagesAtHome: {
-                            goals_for: Math.random() * 1.5 + 1.5,
-                            goals_against: Math.random() * 1,
-                            shots_total: Math.random() * 4 + 12,
-                            shots_on_goal: Math.random() * 2 + 5,
-                            corner_kicks: Math.random() * 2 + 5,
-                            yellow_cards: Math.random() * 1.5 + 1,
-                            fouls: Math.random() * 4 + 11,
-                            offsides: Math.random() * 1.5 + 1.5,
-                            matches_analyzed: 5
+                switch (API_PROVIDER) {
+                    case 'api-football':
+                        data = await makeApiRequest('/status');
+                        if (data.response) {
+                            const remaining = data.response.requests.limit_day - data.response.requests.current;
+                            showMessage(`✅ Conexión exitosa con API-Football! Requests disponibles: ${remaining}`, 'success');
                         }
-                    },
-                    awayTeam: {
-                        name: awayTeam,
-                        averagesGeneral: {
-                            goals_for: Math.random() * 1.5 + 1,
-                            goals_against: Math.random() * 1.5 + 0.5,
-                            shots_total: Math.random() * 4 + 10,
-                            shots_on_goal: Math.random() * 2 + 4,
-                            corner_kicks: Math.random() * 2 + 4,
-                            yellow_cards: Math.random() * 1.5 + 1.5,
-                            fouls: Math.random() * 4 + 12,
-                            offsides: Math.random() * 1.5 + 1,
-                            matches_analyzed: 10
-                        },
-                        averagesAway: {
-                            goals_for: Math.random() * 1 + 0.8,
-                            goals_against: Math.random() * 1.5 + 0.8,
-                            shots_total: Math.random() * 3 + 9,
-                            shots_on_goal: Math.random() * 2 + 3.5,
-                            corner_kicks: Math.random() * 2 + 4,
-                            yellow_cards: Math.random() * 1.5 + 2,
-                            fouls: Math.random() * 4 + 13,
-                            offsides: Math.random() * 1.5 + 1,
-                            matches_analyzed: 5
+                        break;
+                    
+                    case 'football-data':
+                        data = await makeApiRequest('/competitions');
+                        if (data.competitions) {
+                            showMessage(`✅ Conexión exitosa con Football-Data! Competiciones disponibles: ${data.competitions.length}`, 'success');
                         }
-                    },
-                    h2h: {
-                        averages: {
-                            home: {
-                                goals_for: Math.random() * 1.5 + 1.2,
-                                goals_against: Math.random() * 1,
-                                shots_total: Math.random() * 3 + 11,
-                                shots_on_goal: Math.random() * 2 + 4.5,
-                                corner_kicks: Math.random() * 2 + 5,
-                                yellow_cards: Math.random() * 1 + 1.5,
-                                fouls: Math.random() * 3 + 12,
-                                offsides: Math.random() * 1 + 1.5
-                            },
-                            away: {
-                                goals_for: Math.random() * 1 + 0.8,
-                                goals_against: Math.random() * 1.5 + 1,
-                                shots_total: Math.random() * 3 + 9,
-                                shots_on_goal: Math.random() * 2 + 3.5,
-                                corner_kicks: Math.random() * 2 + 4,
-                                yellow_cards: Math.random() * 1 + 2,
-                                fouls: Math.random() * 3 + 13,
-                                offsides: Math.random() * 1 + 1
-                            }
-                        },
-                        fixtures: []
-                    },
-                    league: league,
-                    season: season,
-                    analysisDate: new Date().toISOString()
-                };
-
-                displayResults(currentData);
-                createSpreadsheet(currentData);
-                showSuccess('Análisis completado exitosamente.');
+                        break;
+                    
+                    case 'rapidapi-football':
+                        data = await makeApiRequest('/status');
+                        showMessage(`✅ Conexión exitosa con RapidAPI Football!`, 'success');
+                        break;
+                    
+                    case 'sportmonks':
+                        data = await makeApiRequest('/leagues');
+                        if (data.data) {
+                            showMessage(`✅ Conexión exitosa con SportMonks! Ligas disponibles: ${data.data.length}`, 'success');
+                        }
+                        break;
+                    
+                    case 'the-odds-api':
+                        data = await makeApiRequest('/football_epl/odds');
+                        showMessage(`✅ Conexión exitosa con The Odds API!`, 'success');
+                        break;
+                    
+                    case 'api-sports':
+                        data = await makeApiRequest('/leagues');
+                        showMessage(`✅ Conexión exitosa con API-Sports!`, 'success');
+                        break;
+                    
+                    default:
+                        // API personalizada
+                        data = await makeApiRequest('/status');
+                        showMessage(`✅ Conexión exitosa con API personalizada!`, 'success');
+                }
             } catch (error) {
-                showError('Error en el análisis: ' + error.message);
-            } finally {
-                showLoading(false);
+                showMessage(`❌ Error al conectar: ${error.message}`, 'error');
             }
         }
 
-        // Función para mostrar resultados
-        function displayResults(data) {
-            const resultsDiv = document.getElementById('results');
+        // Cargar equipos según la liga seleccionada
+        async function loadTeams() {
+            const league = document.getElementById('leagueSelect').value;
+            const season = document.getElementById('season').value;
+            
+            if (!league || !API_KEY) return;
 
+            try {
+                showMessage('Cargando equipos...', 'loading');
+                const leagueId = LEAGUES[league].id;
+                let data;
+                
+                switch (API_PROVIDER) {
+                    case 'api-football':
+                    case 'rapidapi-football':
+                        data = await makeApiRequest('/teams', { league: leagueId, season });
+                        if (data.response) {
+                            populateTeamSelects(data.response);
+                            showMessage(`${data.response.length} equipos cargados`, 'success');
+                        }
+                        break;
+                    
+                    case 'football-data':
+                        data = await makeApiRequest(`/competitions/${leagueId}/teams`);
+                        if (data.teams) {
+                            const formattedTeams = data.teams.map(team => ({ team }));
+                            populateTeamSelects(formattedTeams);
+                            showMessage(`${data.teams.length} equipos cargados`, 'success');
+                        }
+                        break;
+                    
+                    default:
+                        data = await makeApiRequest('/teams', { league: leagueId, season });
+                        if (data.response || data.data) {
+                            const teams = data.response || data.data;
+                            populateTeamSelects(teams);
+                            showMessage(`${teams.length} equipos cargados`, 'success');
+                        }
+                }
+                
+            } catch (error) {
+                showMessage('Error al cargar equipos: ' + error.message, 'error');
+            }
+        }
+
+        // Cargar partidos en vivo eliminado (código duplicado)
+
+        // Inicializar aplicación con configuración por defecto
+        function initializeApp() {
+            const leagueSelect = document.getElementById('leagueSelect');
+            Object.keys(LEAGUES).forEach(league => {
+                const option = document.createElement('option');
+                option.value = league;
+                option.textContent = `${league} (${LEAGUES[league].country})`;
+                leagueSelect.appendChild(option);
+            });
+
+            // Configurar API por defecto
+            updateApiConfig();
+        }
+
+        // Añadir función para gestionar cuotas de apuestas
+        async function getBettingOdds(homeTeamId, awayTeamId) {
+            if (API_PROVIDER === 'the-odds-api') {
+                try {
+                    const data = await makeApiRequest('/soccer_epl/odds', {
+                        regions: 'us,uk,eu',
+                        markets: 'h2h,spreads,totals',
+                        oddsFormat: 'decimal'
+                    });
+                    
+                    return data.data || [];
+                } catch (error) {
+                    console.error('Error getting betting odds:', error);
+                    return [];
+                }
+            }
+            return [];
+        }
+
+        // Función para mostrar cuotas en el análisis
+        function displayBettingOdds(odds) {
+            if (!odds || odds.length === 0) return '';
+            
+            return `
+                <div class="data-table">
+                    <h3>💰 Cuotas de Apuestas</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Casa de Apuestas</th>
+                                <th>Local</th>
+                                <th>Empate</th>
+                                <th>Visitante</th>
+                                <th>Más de 2.5</th>
+                                <th>Menos de 2.5</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${odds.slice(0, 5).map(odd => `
+                                <tr>
+                                    <td>${odd.bookmaker || 'N/A'}</td>
+                                    <td>${odd.home || 'N/A'}</td>
+                                    <td>${odd.draw || 'N/A'}</td>
+                                    <td>${odd.away || 'N/A'}</td>
+                                    <td>${odd.over || 'N/A'}</td>
+                                    <td>${odd.under || 'N/A'}</td>
+                                </tr>
+                            `).join('')}
+                        </tbody>
+                    </table>
+                </div>
+            `;
+        }
+
+        // Función para analizar con diferentes APIs según sus fortalezas
+        async function getEnhancedAnalysis(homeTeamId, awayTeamId, league, season) {
+            const analysis = {
+                teams: await Promise.all([
+                    getTeamAnalysis(homeTeamId, league, season, true),
+                    getTeamAnalysis(awayTeamId, league, season, false)
+                ]),
+                h2h: await getHeadToHead(homeTeamId, awayTeamId),
+                odds: await getBettingOdds(homeTeamId, awayTeamId),
+                injuries: await getInjuryReport(homeTeamId, awayTeamId),
+                weather: await getWeatherInfo(league),
+                predictions: await getAIPredictions(homeTeamId, awayTeamId)
+            };
+
+            return analysis;
+        }
+
+        // Función para obtener reporte de lesiones (si la API lo soporta)
+        async function getInjuryReport(homeTeamId, awayTeamId) {
+            if (API_PROVIDER === 'api-football' || API_PROVIDER === 'rapidapi-football') {
+                try {
+                    const [homeInjuries, awayInjuries] = await Promise.all([
+                        makeApiRequest('/injuries', { team: homeTeamId }),
+                        makeApiRequest('/injuries', { team: awayTeamId })
+                    ]);
+                    
+                    return {
+                        home: homeInjuries.response || [],
+                        away: awayInjuries.response || []
+                    };
+                } catch (error) {
+                    console.error('Error getting injuries:', error);
+                    return { home: [], away: [] };
+                }
+            }
+            return { home: [], away: [] };
+        }
+
+        // Función para obtener información del clima (si disponible)
+        async function getWeatherInfo(league) {
+            // Implementar según disponibilidad de la API
+            return {
+                temperature: 'N/A',
+                conditions: 'N/A',
+                wind: 'N/A'
+            };
+        }
+
+        // Función para predicciones AI (si disponible)
+        async function getAIPredictions(homeTeamId, awayTeamId) {
+            if (API_PROVIDER === 'sportmonks' && API_PLAN !== 'free') {
+                try {
+                    const predictions = await makeApiRequest('/predictions', {
+                        home_team: homeTeamId,
+                        away_team: awayTeamId
+                    });
+                    
+                    return predictions.data || {};
+                } catch (error) {
+                    console.error('Error getting predictions:', error);
+                    return {};
+                }
+            }
+            return {};
+        }
+
+        // Función para comparar planes y recomendar upgrade
+        function recommendUpgrade() {
+            const currentPlan = API_PLAN;
+            const provider = API_PROVIDER;
+            const config = API_CONFIGS[provider];
+            const usagePercentage = (requestCount / dailyLimit) * 100;
+
+            if (usagePercentage > 80 && currentPlan === 'free') {
+                showMessage(`
+                    🚀 Recomendación de Upgrade:
+                    Estás usando ${usagePercentage.toFixed(1)}% de tu límite.
+                    Considera el plan Básico de ${config.name} por ${config.plans.basic?.price || 'N/A'}
+                    para obtener más requests y características adicionales.
+                `, 'success');
+            }
+        }
+
+        // Función para exportar configuración de API
+        function exportApiConfig() {
+            const config = {
+                provider: API_PROVIDER,
+                plan: API_PLAN,
+                endpoint: API_ENDPOINT,
+                // No exportar la API Key por seguridad
+                timestamp: new Date().toISOString()
+            };
+
+            const configJson = JSON.stringify(config, null, 2);
+            downloadFile(configJson, 'api-config.json', 'application/json');
+            showMessage('Configuración exportada correctamente', 'success');
+        }
+
+        // Función para importar configuración de API
+        function importApiConfig() {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = '.json';
+            
+            input.onchange = function(event) {
+                const file = event.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        try {
+                            const config = JSON.parse(e.target.result);
+                            
+                            document.getElementById('apiProvider').value = config.provider || 'api-football';
+                            updateApiConfig();
+                            document.getElementById('apiPlan').value = config.plan || 'free';
+                            updatePlanLimits();
+                            document.getElementById('apiEndpoint').value = config.endpoint || '';
+                            
+                            showMessage('Configuración importada correctamente. Recuerda ingresar tu API Key.', 'success');
+                        } catch (error) {
+                            showMessage('Error al importar configuración: ' + error.message, 'error');
+                        }
+                    };
+                    reader.readAsText(file);
+                }
+            };
+            
+            input.click();
+        }
+
+        // Poblar selects de equipos
+        function populateTeamSelects(teams) {
+            const homeSelect = document.getElementById('homeTeam');
+            const awaySelect = document.getElementById('awayTeam');
+            
+            // Limpiar opciones previas
+            homeSelect.innerHTML = '<option value="">Seleccionar Equipo Local</option>';
+            awaySelect.innerHTML = '<option value="">Seleccionar Equipo Visitante</option>';
+            
+            teams.forEach(teamData => {
+                const team = teamData.team;
+                const optionHome = document.createElement('option');
+                const optionAway = document.createElement('option');
+                
+                optionHome.value = team.id;
+                optionHome.textContent = team.name;
+                optionAway.value = team.id;
+                optionAway.textContent = team.name;
+                
+                homeSelect.appendChild(optionHome);
+                awaySelect.appendChild(optionAway);
+            });
+        }
+
+        // Analizar partido
+        async function analyzeMatch() {
+            const homeTeamId = document.getElementById('homeTeam').value;
+            const awayTeamId = document.getElementById('awayTeam').value;
+            const league = document.getElementById('leagueSelect').value;
+            const season = document.getElementById('season').value;
+
+            if (!homeTeamId || !awayTeamId || !league || !API_KEY) {
+                showMessage('Por favor completa todos los campos', 'error');
+                return;
+            }
+
+            if (homeTeamId === awayTeamId) {
+                showMessage('Los equipos deben ser diferentes', 'error');
+                return;
+            }
+
+            try {
+                showMessage('Analizando partido...', 'loading');
+                
+                // Obtener datos de ambos equipos
+                const [homeTeamData, awayTeamData] = await Promise.all([
+                    getTeamAnalysis(homeTeamId, league, season, true),
+                    getTeamAnalysis(awayTeamId, league, season, false)
+                ]);
+
+                // Obtener historial entre equipos
+                const h2hData = await getHeadToHead(homeTeamId, awayTeamId);
+
+                // Mostrar análisis
+                displayAnalysis(homeTeamData, awayTeamData, h2hData);
+                
+            } catch (error) {
+                showMessage('Error en el análisis: ' + error.message, 'error');
+            }
+        }
+
+        // Obtener análisis completo de un equipo con múltiples APIs
+        async function getTeamAnalysis(teamId, league, season, isHome) {
+            const leagueId = LEAGUES[league].id;
+            const venue = isHome ? 'home' : 'away';
+            
+            try {
+                let fixturesData, statsData;
+                
+                switch (API_PROVIDER) {
+                    case 'api-football':
+                    case 'rapidapi-football':
+                        // Obtener últimos 10 partidos
+                        fixturesData = await makeApiRequest('/fixtures', { 
+                            team: teamId, 
+                            league: leagueId, 
+                            season, 
+                            last: 10 
+                        });
+                        
+                        // Obtener estadísticas del equipo
+                        statsData = await makeApiRequest('/teams/statistics', { 
+                            league: leagueId, 
+                            season, 
+                            team: teamId 
+                        });
+                        break;
+                    
+                    case 'football-data':
+                        // Football-Data usa diferentes endpoints
+                        fixturesData = await makeApiRequest(`/teams/${teamId}/matches`, { 
+                            competitions: leagueId,
+                            limit: 10
+                        });
+                        
+                        // Las estadísticas pueden no estar disponibles en el plan gratuito
+                        statsData = { response: {} };
+                        break;
+                    
+                    case 'sportmonks':
+                        fixturesData = await makeApiRequest(`/fixtures`, { 
+                            'filter[localteam_id]': teamId,
+                            'filter[season_id]': season,
+                            'include': 'stats',
+                            limit: 10
+                        });
+                        statsData = { response: {} };
+                        break;
+                    
+                    default:
+                        // API genérica
+                        fixturesData = await makeApiRequest('/fixtures', { 
+                            team: teamId, 
+                            season, 
+                            limit: 10 
+                        });
+                        statsData = await makeApiRequest('/teams/stats', { 
+                            team: teamId, 
+                            season 
+                        });
+                }
+
+                // Procesar datos según la respuesta de la API
+                const fixtures = fixturesData?.response || fixturesData?.matches || fixturesData?.data || [];
+                const statistics = statsData?.response || {};
+
+                return {
+                    teamId,
+                    fixtures,
+                    statistics,
+                    venue,
+                    analysis: calculateTeamAnalysis(fixtures, statistics, venue)
+                };
+            } catch (error) {
+                console.error('Error getting team analysis:', error);
+                // Retornar datos vacíos en caso de error
+                return {
+                    teamId,
+                    fixtures: [],
+                    statistics: {},
+                    venue,
+                    analysis: getEmptyAnalysis()
+                };
+            }
+        }
+
+        // Obtener historial entre equipos con múltiples APIs
+        async function getHeadToHead(team1Id, team2Id) {
+            try {
+                let data;
+                
+                switch (API_PROVIDER) {
+                    case 'api-football':
+                    case 'rapidapi-football':
+                        data = await makeApiRequest('/fixtures/headtohead', { 
+                            h2h: `${team1Id}-${team2Id}`,
+                            last: 10 
+                        });
+                        return data.response || [];
+                    
+                    case 'football-data':
+                        // Football-Data puede requerir endpoints específicos
+                        data = await makeApiRequest(`/teams/${team1Id}/matches`, { 
+                            opponent: team2Id,
+                            limit: 10
+                        });
+                        return data.matches || [];
+                    
+                    case 'sportmonks':
+                        data = await makeApiRequest('/head2head', { 
+                            'teams[]': [team1Id, team2Id],
+                            limit: 10
+                        });
+                        return data.data || [];
+                    
+                    default:
+                        data = await makeApiRequest('/fixtures/h2h', { 
+                            team1: team1Id,
+                            team2: team2Id,
+                            limit: 10
+                        });
+                        return data.data || data.response || [];
+                }
+            } catch (error) {
+                console.error('Error getting head to head:', error);
+                return [];
+            }
+        }
+
+        // Análisis vacío para casos de error
+        function getEmptyAnalysis() {
+            return {
+                totalMatches: 0,
+                venueMatches: 0,
+                wins: 0,
+                draws: 0,
+                losses: 0,
+                goalsFor: 0,
+                goalsAgainst: 0,
+                avgStats: {
+                    shotsTotal: 0,
+                    shotsOnTarget: 0,
+                    cornerKicks: 0,
+                    yellowCards: 0,
+                    fouls: 0,
+                    offsides: 0
+                },
+                avgGoalsFor: '0.00',
+                avgGoalsAgainst: '0.00',
+                winPercentage: '0.0'
+            };
+        }
+
+                        // Obtener estadísticas del equipo
+            statsResponse = await fetch(`https://v3.football.api-sports.io/teams/statistics?league=${leagueId}&season=${season}&team=${teamId}`, {
+                headers: {
+                    'X-RapidAPI-Key': API_KEY,
+                    'X-RapidAPI-Host': 'v3.football.api-sports.io'
+                }
+            });
+
+            const fixturesData = await fixturesResponse.json();
+            const statsData = await statsResponse.json();
+
+            // Procesar datos
+            return {
+                teamId,
+                fixtures: fixturesData.response || [],
+                statistics: statsData.response || {},
+                venue,
+                analysis: calculateTeamAnalysis(fixturesData.response || [], statsData.response || {}, venue)
+            };
+        }
+
+        // Calcular análisis del equipo
+        function calculateTeamAnalysis(fixtures, statistics, venue) {
+            const venueFixtures = fixtures.filter(fixture => 
+                (venue === 'home' && fixture.teams.home.id == fixtures[0]?.teams?.home?.id) ||
+                (venue === 'away' && fixture.teams.away.id == fixtures[0]?.teams?.away?.id)
+            );
+
+            const analysis = {
+                totalMatches: fixtures.length,
+                venueMatches: venueFixtures.length,
+                wins: 0,
+                draws: 0,
+                losses: 0,
+                goalsFor: 0,
+                goalsAgainst: 0,
+                avgStats: {
+                    shotsTotal: 0,
+                    shotsOnTarget: 0,
+                    cornerKicks: 0,
+                    yellowCards: 0,
+                    fouls: 0,
+                    offsides: 0
+                }
+            };
+
+            // Analizar últimos 10 partidos
+            fixtures.forEach(fixture => {
+                if (fixture.fixture.status.short === 'FT') {
+                    const isHome = fixture.teams.home.id == fixtures[0]?.teams?.home?.id;
+                    const teamScore = isHome ? fixture.goals.home : fixture.goals.away;
+                    const opponentScore = isHome ? fixture.goals.away : fixture.goals.home;
+
+                    analysis.goalsFor += teamScore || 0;
+                    analysis.goalsAgainst += opponentScore || 0;
+
+                    if (teamScore > opponentScore) analysis.wins++;
+                    else if (teamScore === opponentScore) analysis.draws++;
+                    else analysis.losses++;
+
+                    // Estadísticas del partido
+                    if (fixture.statistics) {
+                        const teamStats = fixture.statistics.find(s => s.team.id == fixtures[0]?.teams?.home?.id) || 
+                                        fixture.statistics.find(s => s.team.id == fixtures[0]?.teams?.away?.id);
+                        
+                        if (teamStats && teamStats.statistics) {
+                            teamStats.statistics.forEach(stat => {
+                                const value = parseInt(stat.value) || 0;
+                                switch(stat.type) {
+                                    case 'Total Shots':
+                                        analysis.avgStats.shotsTotal += value;
+                                        break;
+                                    case 'Shots on Goal':
+                                        analysis.avgStats.shotsOnTarget += value;
+                                        break;
+                                    case 'Corner Kicks':
+                                        analysis.avgStats.cornerKicks += value;
+                                        break;
+                                    case 'Yellow Cards':
+                                        analysis.avgStats.yellowCards += value;
+                                        break;
+                                    case 'Fouls':
+                                        analysis.avgStats.fouls += value;
+                                        break;
+                                    case 'Offsides':
+                                        analysis.avgStats.offsides += value;
+                                        break;
+                                }
+                            });
+                        }
+                    }
+                }
+            });
+
+            // Calcular promedios
+            const matchCount = analysis.totalMatches || 1;
+            Object.keys(analysis.avgStats).forEach(key => {
+                analysis.avgStats[key] = (analysis.avgStats[key] / matchCount).toFixed(2);
+            });
+
+            analysis.avgGoalsFor = (analysis.goalsFor / matchCount).toFixed(2);
+            analysis.avgGoalsAgainst = (analysis.goalsAgainst / matchCount).toFixed(2);
+            analysis.winPercentage = ((analysis.wins / matchCount) * 100).toFixed(1);
+
+            return analysis;
+        }
+
+        // Obtener historial entre equipos eliminado (código duplicado ya implementado arriba)
+
+        // Mostrar análisis completo actualizado
+        function displayAnalysis(homeData, awayData, h2hData) {
+            const resultsDiv = document.getElementById('results');
+            
+            // Verificar límites de uso
+            recommendUpgrade();
+            
             const html = `
-                <div class="match-analysis">
-                    <div class="match-header">
-                        <div class="match-teams">
-                            <span>🏠 ${data.homeTeam.name}</span>
-                            <span class="vs">VS</span>
-                            <span>✈️ ${data.awayTeam.name}</span>
+                <div class="team-comparison">
+                    <div class="team-stats">
+                        <h3>📍 Equipo Local</h3>
+                        <div class="statistics-grid">
+                            <div class="stat-card">
+                                <div class="stat-value">${homeData.analysis.winPercentage}%</div>
+                                <div class="stat-label">% Victorias</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-value">${homeData.analysis.avgGoalsFor}</div>
+                                <div class="stat-label">Goles por Partido</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-value">${homeData.analysis.avgStats.shotsTotal}</div>
+                                <div class="stat-label">Remates Totales</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-value">${homeData.analysis.avgStats.shotsOnTarget}</div>
+                                <div class="stat-label">Remates a Puerta</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-value">${homeData.analysis.avgStats.cornerKicks}</div>
+                                <div class="stat-label">Tiros de Esquina</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-value">${homeData.analysis.avgStats.yellowCards}</div>
+                                <div class="stat-label">Tarjetas Amarillas</div>
+                            </div>
                         </div>
-                        <p>${data.league} - Temporada ${data.season}</p>
-                        <p style="opacity: 0.8; font-size: 0.9em;">Análisis realizado: ${new Date(data.analysisDate).toLocaleString()}</p>
                     </div>
-                    <div class="stats-grid">
-                        <div class="stats-section">
-                            <div class="stats-title">🏠 ${data.homeTeam.name} - Promedio General</div>
-                            ${formatStatsDisplay(data.homeTeam.averagesGeneral)}
+                    
+                    <div class="vs-badge">VS</div>
+                    
+                    <div class="team-stats">
+                        <h3>✈️ Equipo Visitante</h3>
+                        <div class="statistics-grid">
+                            <div class="stat-card">
+                                <div class="stat-value">${awayData.analysis.winPercentage}%</div>
+                                <div class="stat-label">% Victorias</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-value">${awayData.analysis.avgGoalsFor}</div>
+                                <div class="stat-label">Goles por Partido</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-value">${awayData.analysis.avgStats.shotsTotal}</div>
+                                <div class="stat-label">Remates Totales</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-value">${awayData.analysis.avgStats.shotsOnTarget}</div>
+                                <div class="stat-label">Remates a Puerta</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-value">${awayData.analysis.avgStats.cornerKicks}</div>
+                                <div class="stat-label">Tiros de Esquina</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-value">${awayData.analysis.avgStats.yellowCards}</div>
+                                <div class="stat-label">Tarjetas Amarillas</div>
+                            </div>
                         </div>
-                        <div class="stats-section">
-                            <div class="stats-title">✈️ ${data.awayTeam.name} - Promedio General</div>
-                            ${formatStatsDisplay(data.awayTeam.averagesGeneral)}
-                        </div>
-                        <div class="stats-section">
-                            <div class="stats-title">🏘️ ${data.homeTeam.name} - Como Local</div>
-                            ${formatStatsDisplay(data.homeTeam.averagesAtHome)}
-                        </div>
-                        <div class="stats-section">
-                            <div class="stats-title">🛣️ ${data.awayTeam.name} - Como Visitante</div>
-                            ${formatStatsDisplay(data.awayTeam.averagesAway)}
-                        </div>
-                        ${data.h2h.averages ? `
-                        <div class="stats-section">
-                            <div class="stats-title">🤝 Historial H2H - ${data.homeTeam.name}</div>
-                            ${formatStatsDisplay(data.h2h.averages.home)}
-                        </div>
-                        <div class="stats-section">
-                            <div class="stats-title">🤝 Historial H2H - ${data.awayTeam.name}</div>
-                            ${formatStatsDisplay(data.h2h.averages.away)}
-                        </div>
-                        ` : ''}
                     </div>
-                    ${generateAdvancedPredictions(data)}
                 </div>
-                <div class="match-analysis" style="margin-top: 20px;">
-                    <div class="match-header" style="background: linear-gradient(135deg, #28a745 0%, #20c997 100%);">
-                        <h3>📊 Análisis Comparativo Detallado</h3>
-                    </div>
-                    ${generateComparativeAnalysis(data)}
+
+                <div class="data-table">
+                    <h3>📊 Análisis Estadístico Completo</h3>
+                    <p><strong>API Utilizada:</strong> ${API_CONFIGS[API_PROVIDER].name} - Plan ${API_PLAN.toUpperCase()}</p>
+                    <p><strong>Requests Usados:</strong> ${requestCount}/${dailyLimit} (${((requestCount/dailyLimit)*100).toFixed(1)}%)</p>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Estadística</th>
+                                <th>Local</th>
+                                <th>Visitante</th>
+                                <th>Promedio</th>
+                                <th>Ventaja</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${generateComparisonRows(homeData.analysis, awayData.analysis)}
+                        </tbody>
+                    </table>
                 </div>
+
+                <div class="data-table">
+                    <h3>🏆 Historial Entre Equipos (Últimos 10 partidos)</h3>
+                    ${generateH2HTable(h2hData)}
+                </div>
+
+                <div class="data-table">
+                    <h3>📈 Recomendaciones de Apuesta</h3>
+                    ${generateBettingRecommendations(homeData.analysis, awayData.analysis, h2hData)}
+                </div>
+
+                ${displayBettingOdds([])}
             `;
 
             resultsDiv.innerHTML = html;
+            analysisData = { homeData, awayData, h2hData };
         }
 
-        // Función para formatear estadísticas
-        function formatStatsDisplay(averages) {
-            if (!averages) return '<p>No hay datos disponibles</p>';
-
-            return `
-                <div class="stat-row">
-                    <span class="stat-label">⚽ Goles a Favor</span>
-                    <span class="stat-value">${averages.goals_for?.toFixed(1) || '0.0'}</span>
-                </div>
-                <div class="stat-row">
-                    <span class="stat-label">🥅 Goles en Contra</span>
-                    <span class="stat-value">${averages.goals_against?.toFixed(1) || '0.0'}</span>
-                </div>
-                <div class="stat-row">
-                    <span class="stat-label">🎯 Remates Totales</span>
-                    <span class="stat-value">${averages.shots_total?.toFixed(1) || '0.0'}</span>
-                </div>
-                <div class="stat-row">
-                    <span class="stat-label">🎪 Remates a Puerta</span>
-                    <span class="stat-value">${averages.shots_on_goal?.toFixed(1) || '0.0'}</span>
-                </div>
-                <div class="stat-row">
-                    <span class="stat-label">🚩 Tiros de Esquina</span>
-                    <span class="stat-value">${averages.corner_kicks?.toFixed(1) || '0.0'}</span>
-                </div>
-                <div class="stat-row">
-                    <span class="stat-label">🟨 Tarjetas Amarillas</span>
-                    <span class="stat-value">${averages.yellow_cards?.toFixed(1) || '0.0'}</span>
-                </div>
-                <div class="stat-row">
-                    <span class="stat-label">⚠️ Faltas</span>
-                    <span class="stat-value">${averages.fouls?.toFixed(1) || '0.0'}</span>
-                </div>
-                <div class="stat-row">
-                    <span class="stat-label">🏃 Fueras de Juego</span>
-                    <span class="stat-value">${averages.offsides?.toFixed(1) || '0.0'}</span>
-                </div>
-                <div class="stat-row" style="border-top: 2px solid #667eea; margin-top: 10px; padding-top: 10px;">
-                    <span class="stat-label">📈 Partidos Analizados</span>
-                    <span class="stat-value">${averages.matches_analyzed || '0'}</span>
-                </div>
-            `;
-        }
-
-        // Función para generar predicciones avanzadas
-        function generateAdvancedPredictions(data) {
-            const homeGeneralScore = calculateAdvancedTeamScore(data.homeTeam.averagesGeneral);
-            const awayGeneralScore = calculateAdvancedTeamScore(data.awayTeam.averagesGeneral);
-            const homeSpecificScore = calculateAdvancedTeamScore(data.homeTeam.averagesAtHome);
-            const awaySpecificScore = calculateAdvancedTeamScore(data.awayTeam.averagesAway);
-
-            const homeFinalScore = (homeGeneralScore * 0.6) + (homeSpecificScore * 0.4);
-            const awayFinalScore = (awayGeneralScore * 0.6) + (awaySpecificScore * 0.4);
-            const totalScore = homeFinalScore + awayFinalScore;
-            const homeWinProb = totalScore > 0 ? (homeFinalScore / totalScore * 100) : 50;
-            const awayWinProb = 100 - homeWinProb;
-
-            const predictions = [];
-
-            const avgGoalsPerMatch = (data.homeTeam.averagesAtHome?.goals_for || 0) +
-                                    (data.awayTeam.averagesAway?.goals_against || 0);
-            predictions.push({
-                type: "Over/Under 2.5 Goles",
-                prediction: avgGoalsPerMatch > 2.5 ? "Over 2.5" : "Under 2.5",
-                confidence: Math.abs(avgGoalsPerMatch - 2.5) * 20 + 60
-            });
-
-            const homeScoring = (data.homeTeam.averagesAtHome?.goals_for || 0) > 0.8;
-            const awayScoring = (data.awayTeam.averagesAway?.goals_for || 0) > 0.8;
-            predictions.push({
-                type: "Ambos Equipos Marcan",
-                prediction: homeScoring && awayScoring ? "Sí" : "No",
-                confidence: (homeScoring && awayScoring) ? 75 : 65
-            });
-
-            const avgCorners = ((data.homeTeam.averagesAtHome?.corner_kicks || 0) +
-                              (data.awayTeam.averagesAway?.corner_kicks || 0));
-            predictions.push({
-                type: "Total Córners",
-                prediction: avgCorners > 9 ? "Over 9.5" : "Under 9.5",
-                confidence: Math.abs(avgCorners - 9.5) * 8 + 55
-            });
-
-            return `
-                <div class="prediction-box">
-                    <div class="prediction-title">🎯 Predicciones Avanzadas</div>
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-top: 20px;">
-                        <div style="text-align: center;">
-                            <h4>🏆 Resultado Principal</h4>
-                            <div class="prediction-value" style="font-size: 1.2em;">
-                                ${homeWinProb > awayWinProb ?
-                                    `${data.homeTeam.name} (${homeWinProb.toFixed(1)}%)` :
-                                    `${data.awayTeam.name} (${awayWinProb.toFixed(1)}%)`}
-                            </div>
-                        </div>
-                        ${predictions.map(pred => `
-                            <div style="text-align: center;">
-                                <h4>${pred.type}</h4>
-                                <div style="font-size: 1.1em; font-weight: bold; color: #2a5298;">
-                                    ${pred.prediction}
-                                </div>
-                                <div style="font-size: 0.9em; opacity: 0.8;">
-                                    Confianza: ${pred.confidence.toFixed(0)}%
-                                </div>
-                            </div>
-                        `).join('')}
-                    </div>
-                </div>
-            `;
-        }
-
-        // Función para calcular puntuación avanzada de equipo
-        function calculateAdvancedTeamScore(averages) {
-            if (!averages) return 0;
-
-            const attackScore = (averages.goals_for * 4) +
-                               (averages.shots_on_goal * 1) +
-                               (averages.corner_kicks * 0.5);
-
-            const defenseScore = (averages.goals_against * -3) -
-                                (averages.yellow_cards * 0.2);
-
-            return attackScore + defenseScore;
-        }
-
-        // Función para generar análisis comparativo
-        function generateComparativeAnalysis(data) {
-            const comparisons = [
-                {
-                    stat: 'goals_for',
-                    name: 'Poder Ofensivo',
-                    homeValue: data.homeTeam.averagesAtHome?.goals_for || 0,
-                    awayValue: data.awayTeam.averagesAway?.goals_for || 0,
-                    unit: 'goles/partido'
-                },
-                {
-                    stat: 'goals_against',
-                    name: 'Solidez Defensiva',
-                    homeValue: data.homeTeam.averagesAtHome?.goals_against || 0,
-                    awayValue: data.awayTeam.averagesAway?.goals_against || 0,
-                    unit: 'goles/partido',
-                    inverted: true
-                },
-                {
-                    stat: 'shots_on_goal',
-                    name: 'Peligrosidad',
-                    homeValue: data.homeTeam.averagesAtHome?.shots_on_goal || 0,
-                    awayValue: data.awayTeam.averagesAway?.shots_on_goal || 0,
-                    unit: 'tiros/partido'
-                },
-                {
-                    stat: 'corner_kicks',
-                    name: 'Dominio Territorial',
-                    homeValue: data.homeTeam.averagesAtHome?.corner_kicks || 0,
-                    awayValue: data.awayTeam.averagesAway?.corner_kicks || 0,
-                    unit: 'córners/partido'
-                }
-            ];
-
-            const comparisonHTML = comparisons.map(comp => {
-                const diff = comp.homeValue - comp.awayValue;
-                const maxValue = Math.max(comp.homeValue, comp.awayValue);
-                const advantage = comp.inverted ?
-                    (diff < -0.1 ? 'home' : diff > 0.1 ? 'away' : 'equal') :
-                    (diff > 0.1 ? 'home' : diff < -0.1 ? 'away' : 'equal');
-
-                return `
-                    <div style="margin-bottom: 25px; padding: 20px; background: #f8f9fa; border-radius: 10px;">
-                        <h4 style="text-align: center; margin-bottom: 15px; color: #495057;">${comp.name}</h4>
-                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-                            <span style="font-weight: bold;">${data.homeTeam.name}: ${comp.homeValue.toFixed(1)} ${comp.unit}</span>
-                            <span style="font-weight: bold;">${data.awayTeam.name}: ${comp.awayValue.toFixed(1)} ${comp.unit}</span>
-                        </div>
-                        <div style="background: #dee2e6; height: 20px; border-radius: 10px; overflow: hidden; position: relative;">
-                            <div style="
-                                position: absolute;
-                                left: 0;
-                                top: 0;
-                                height: 100%;
-                                width: ${maxValue > 0 ? (comp.homeValue / maxValue * 50) : 0}%;
-                                background: linear-gradient(90deg, #667eea, #764ba2);
-                                opacity: ${advantage === 'home' ? 1 : 0.6};
-                            "></div>
-                            <div style="
-                                position: absolute;
-                                right: 0;
-                                top: 0;
-                                height: 100%;
-                                width: ${maxValue > 0 ? (comp.awayValue / maxValue * 50) : 0}%;
-                                background: linear-gradient(90deg, #28a745, #20c997);
-                                opacity: ${advantage === 'away' ? 1 : 0.6};
-                            "></div>
-                        </div>
-                        <div style="text-align: center; margin-top: 8px; font-size: 0.9em;">
-                            <strong>${advantage === 'home' ? `Ventaja: ${data.homeTeam.name}` :
-                                     advantage === 'away' ? `Ventaja: ${data.awayTeam.name}` :
-                                     'Equilibrado'}</strong>
-                        </div>
-                    </div>
-                `;
-            }).join('');
-
-            return `<div style="padding: 30px;">${comparisonHTML}</div>`;
-        }
-
-        // Función para crear hoja de cálculo
-        function createSpreadsheet(data) {
-            const container = document.getElementById('spreadsheetContainer');
-            const tableHeader = document.getElementById('tableHeader');
-            const tableBody = document.getElementById('tableBody');
-
-            tableHeader.innerHTML = `
-                <tr>
-                    <th>Estadística</th>
-                    <th>${data.homeTeam.name} (Local)</th>
-                    <th>${data.awayTeam.name} (Visitante)</th>
-                    <th>H2H ${data.homeTeam.name}</th>
-                    <th>H2H ${data.awayTeam.name}</th>
-                    <th>Promedio General</th>
-                    <th>Diferencia</th>
-                    <th>Predicción</th>
-                </tr>
-            `;
-
+        // Generar filas de comparación
+        function generateComparisonRows(homeAnalysis, awayAnalysis) {
             const stats = [
-                { key: 'shots_total', name: 'Remates Totales' },
-                { key: 'shots_on_goal', name: 'Remates a Puerta' },
-                { key: 'corner_kicks', name: 'Tiros de Esquina' },
-                { key: 'yellow_cards', name: 'Tarjetas Amarillas' },
-                { key: 'fouls', name: 'Faltas' },
-                { key: 'offsides', name: 'Fueras de Juego' },
-                { key: 'goals_for', name: 'Goles a Favor' },
-                { key: 'goals_against', name: 'Goles en Contra' }
+                { key: 'winPercentage', label: '% Victorias' },
+                { key: 'avgGoalsFor', label: 'Goles por Partido' },
+                { key: 'avgGoalsAgainst', label: 'Goles Recibidos' },
             ];
 
-            let tableRows = '';
-            stats.forEach(stat => {
-                const homeValue = data.homeTeam.averagesGeneral[stat.key] || 0;
-                const awayValue = data.awayTeam.averagesGeneral[stat.key] || 0;
-                const h2hHomeValue = data.h2h.averages ? (data.h2h.averages.home[stat.key] || 0) : 0;
-                const h2hAwayValue = data.h2h.averages ? (data.h2h.averages.away[stat.key] || 0) : 0;
-                const average = (homeValue + awayValue) / 2;
-                const difference = homeValue - awayValue;
-                const prediction = difference > 0.5 ? '↗️ Local' : difference < -0.5 ? '↘️ Visitante' : '➡️ Parejo';
-
-                tableRows += `
-                    <tr>
-                        <td><strong>${stat.name}</strong></td>
-                        <td>${homeValue.toFixed(2)}</td>
-                        <td>${awayValue.toFixed(2)}</td>
-                        <td>${h2hHomeValue.toFixed(2)}</td>
-                        <td>${h2hAwayValue.toFixed(2)}</td>
-                        <td>${average.toFixed(2)}</td>
-                        <td style="color: ${difference > 0 ? 'green' : difference < 0 ? 'red' : 'orange'}">${difference.toFixed(2)}</td>
-                        <td>${prediction}</td>
-                    </tr>
-                `;
-            });
-
-            const homeTotalScore = calculateAdvancedTeamScore(data.homeTeam.averagesGeneral);
-            const awayTotalScore = calculateAdvancedTeamScore(data.awayTeam.averagesGeneral);
-            const totalDifference = homeTotalScore - awayTotalScore;
-
-            tableRows += `
-                <tr style="background: #e3f2fd; font-weight: bold;">
-                    <td><strong>🏆 PUNTUACIÓN TOTAL</strong></td>
-                    <td>${homeTotalScore.toFixed(2)}</td>
-                    <td>${awayTotalScore.toFixed(2)}</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>${((homeTotalScore + awayTotalScore) / 2).toFixed(2)}</td>
-                    <td style="color: ${totalDifference > 0 ? 'green' : totalDifference < 0 ? 'red' : 'orange'}">${totalDifference.toFixed(2)}</td>
-                    <td>${totalDifference > 1 ? '🏠 Victoria Local' : totalDifference < -1 ? '✈️ Victoria Visitante' : '🤝 Empate'}</td>
-                </tr>
-            `;
-
-            tableBody.innerHTML = tableRows;
-            container.style.display = 'block';
-        }
-
-        // Función para exportar a Excel
-        function exportToExcel() {
-            if (!currentData) {
-                showError('No hay datos para exportar. Primero analiza un partido.');
-                return;
-            }
-
-            const excelData = [];
-
-            excelData.push(['ANÁLISIS DE APUESTAS DEPORTIVAS']);
-            excelData.push([`${currentData.homeTeam.name} vs ${currentData.awayTeam.name}`]);
-            excelData.push([`Liga: ${currentData.league} - Temporada: ${currentData.season}`]);
-            excelData.push([]);
-
-            excelData.push([
-                'Estadística',
-                `${currentData.homeTeam.name} (Local)`,
-                `${currentData.awayTeam.name} (Visitante)`,
-                `H2H ${currentData.homeTeam.name}`,
-                `H2H ${currentData.awayTeam.name}`,
-                'Promedio General',
-                'Diferencia',
-                'Predicción'
-            ]);
-
-            const stats = [
-                { key: 'shots_total', name: 'Remates Totales' },
-                { key: 'shots_on_goal', name: 'Remates a Puerta' },
-                { key: 'corner_kicks', name: 'Tiros de Esquina' },
-                { key: 'yellow_cards', name: 'Tarjetas Amarillas' },
-                { key: 'fouls', name: 'Faltas' },
-                { key: 'offsides', name: 'Fueras de Juego' },
-                { key: 'goals_for', name: 'Goles a Favor' },
-                { key: 'goals_against', name: 'Goles en Contra' }
+            const avgStats = [
+                { key: 'shotsTotal', label: 'Remates Totales' },
+                { key: 'shotsOnTarget', label: 'Remates a Puerta' },
+                { key: 'cornerKicks', label: 'Tiros de Esquina' },
+                { key: 'yellowCards', label: 'Tarjetas Amarillas' },
+                { key: 'fouls', label: 'Faltas' },
+                { key: 'offsides', label: 'Fueras de Juego' }
             ];
 
-            stats.forEach(stat => {
-                const homeValue = currentData.homeTeam.averagesGeneral[stat.key] || 0;
-                const awayValue = currentData.awayTeam.averagesGeneral[stat.key] || 0;
-                const h2hHomeValue = currentData.h2h.averages ? (currentData.h2h.averages.home[stat.key] || 0) : 0;
-                const h2hAwayValue = currentData.h2h.averages ? (currentData.h2h.averages.away[stat.key] || 0) : 0;
-                const average = (homeValue + awayValue) / 2;
-                const difference = homeValue - awayValue;
-                const prediction = difference > 0.5 ? 'Local' : difference < -0.5 ? 'Visitante' : 'Parejo';
+            let rows = '';
 
-                excelData.push([
-                    stat.name,
-                    homeValue.toFixed(2),
-                    awayValue.toFixed(2),
-                    h2hHomeValue.toFixed(2),
-                    h2hAwayValue.toFixed(2),
-                    average.toFixed(2),
-                    difference.toFixed(2),
-                    prediction
-                ]);
-            });
-
-            const homeTotalScore = calculateAdvancedTeamScore(currentData.homeTeam.averagesGeneral);
-            const awayTotalScore = calculateAdvancedTeamScore(currentData.awayTeam.averagesGeneral);
-            const totalDifference = homeTotalScore - awayTotalScore;
-
-            excelData.push([]);
-            excelData.push([
-                'PUNTUACIÓN TOTAL',
-                homeTotalScore.toFixed(2),
-                awayTotalScore.toFixed(2),
-                '-',
-                '-',
-                ((homeTotalScore + awayTotalScore) / 2).toFixed(2),
-                totalDifference.toFixed(2),
-                totalDifference > 1 ? 'Victoria Local' : totalDifference < -1 ? 'Victoria Visitante' : 'Empate'
-            ]);
-
-            const csvContent = excelData.map(row =>
-                row.map(cell =>
-                    typeof cell === 'string' && cell.includes(',') ? `"${cell}"` : cell
-                ).join(',')
-            ).join('\n');
-
-            const blob = new Blob(['\ufeff' + csvContent], { type: 'text/csv;charset=utf-8;' });
-            const link = document.createElement('a');
-            const url = URL.createObjectURL(blob);
-
-            link.setAttribute('href', url);
-            link.setAttribute('download', `analisis_${currentData.homeTeam.name}_vs_${currentData.awayTeam.name}_${Date.now()}.csv`);
-            link.style.visibility = 'hidden';
-
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-
-            showSuccess('Archivo Excel exportado exitosamente.');
-        }
-
-        // Función para limpiar resultados
-        function clearResults() {
-            document.getElementById('results').innerHTML = '';
-            document.getElementById('spreadsheetContainer').style.display = 'none';
-        }
-
-        // Inicialización
-        document.addEventListener('DOMContentLoaded', function() {
-            showSuccess('Sistema iniciado. Selecciona una liga y carga los equipos para comenzar.');
-        });
-    </script>
-</body>
-</html>
+            stats
