@@ -8,7 +8,7 @@
 <style>
 
 body{
-font-family:Arial;
+font-family:Arial,sans-serif;
 background:#eef3fa;
 margin:0;
 padding:0;
@@ -57,6 +57,7 @@ padding:10px;
 margin:8px 0;
 border-radius:8px;
 border:1px solid #ccc;
+box-sizing:border-box;
 }
 
 .card{
@@ -92,90 +93,177 @@ text-align:center;
 margin-bottom:20px;
 }
 
+.center{
+text-align:center;
+}
+
 </style>
 
 </head>
+
 <body>
 
 <div class="container">
 
 <h1>Examen Interactivo - Wix y Shopify</h1>
 
+<!-- INICIO -->
+
 <div id="home">
 
-<center>
-<button onclick="showProfessor()">Profesor</button>
-<button onclick="showStudent()">Alumno</button>
-</center>
+<div class="center">
+
+<button onclick="showProfessor()">
+Profesor
+</button>
+
+<button onclick="showStudent()">
+Alumno
+</button>
 
 </div>
+
+</div>
+
+<!-- LOGIN PROFESOR -->
 
 <div id="professorLogin" class="hidden">
 
 <h2>Login Profesor</h2>
 
 <input type="text" id="profUser" placeholder="Usuario">
+
 <input type="password" id="profPass" placeholder="Clave">
 
-<button onclick="loginProfessor()">Ingresar</button>
-<button onclick="goHome()">Volver</button>
+<div class="center">
+
+<button onclick="loginProfessor()">
+Ingresar
+</button>
+
+<button onclick="goHome()">
+Volver
+</button>
 
 </div>
+
+</div>
+
+<!-- PANEL PROFESOR -->
 
 <div id="professorPanel" class="hidden">
 
-<button class="logout" onclick="logout()">Salir</button>
+<div class="center">
 
-<h2>Panel Profesor</h2>
+<button class="logout" onclick="logout()">
+Salir
+</button>
+
+</div>
+
+<h2>Panel del Profesor</h2>
 
 <div class="card">
-<h3>Alumnos disponibles</h3>
+
+<h3>Registrar Alumno</h3>
+
+<input type="text" id="studentName" placeholder="Usuario alumno">
+
+<input type="password" id="studentPassword" placeholder="Clave alumno">
+
+<div class="center">
+
+<button onclick="registerStudent()">
+Registrar Alumno
+</button>
+
+</div>
+
+</div>
+
+<div class="card">
+
+<h3>Alumnos Registrados</h3>
+
 <div id="studentList"></div>
+
 </div>
 
 <div class="card">
-<h3>Resultados</h3>
+
+<h3>Resultados y Calificaciones</h3>
+
 <div id="results"></div>
+
 </div>
 
 </div>
+
+<!-- LOGIN ALUMNO -->
 
 <div id="studentLogin" class="hidden">
 
 <h2>Login Alumno</h2>
 
 <input type="text" id="studentUserLogin" placeholder="Usuario">
+
 <input type="password" id="studentPassLogin" placeholder="Clave">
 
-<button onclick="studentLogin()">Ingresar</button>
-<button onclick="goHome()">Volver</button>
+<div class="center">
+
+<button onclick="studentLogin()">
+Ingresar
+</button>
+
+<button onclick="goHome()">
+Volver
+</button>
 
 </div>
+
+</div>
+
+<!-- EXAMEN -->
 
 <div id="examSection" class="hidden">
 
 <h2>Examen</h2>
 
-<div class="timer" id="timer">15:00</div>
+<div class="timer" id="timer">
+15:00
+</div>
 
 <div id="studentExamName"></div>
 
 <form id="examForm"></form>
 
-<center>
-<button onclick="submitExam()">Finalizar Examen</button>
-<button class="logout" onclick="studentExit()">Salir</button>
-</center>
+<div class="center">
+
+<button type="button" onclick="submitExam()">
+Finalizar Examen
+</button>
+
+<button type="button" class="logout" onclick="studentExit()">
+Salir
+</button>
 
 </div>
+
+</div>
+
+<!-- RESULTADO -->
 
 <div id="finalResult" class="hidden">
 
 <div class="result" id="scoreText"></div>
 
-<center>
-<button onclick="goHome()">Volver</button>
-</center>
+<div class="center">
+
+<button onclick="goHome()">
+Volver al Inicio
+</button>
+
+</div>
 
 </div>
 
@@ -183,25 +271,53 @@ margin-bottom:20px;
 
 <script>
 
-/* LOGIN PROFESOR */
+/* =========================
+   LOGIN PROFESOR
+========================= */
 
 const professorUser = "profesor";
 const professorPass = "profesor123";
 
-/* ALUMNOS FIJOS */
+/* =========================
+   STORAGE ALUMNOS
+========================= */
 
-const students = [
+let students = JSON.parse(localStorage.getItem("students"));
 
-{ user:"alumno1", password:"1234" },
-{ user:"alumno2", password:"1234" },
-{ user:"alumno3", password:"1234" },
-{ user:"alumno4", password:"1234" }
+if(!students){
+
+students = [
+
+{
+user:"alumno1",
+password:"1234"
+},
+
+{
+user:"alumno2",
+password:"1234"
+}
 
 ];
 
-let results = [];
+localStorage.setItem(
+"students",
+JSON.stringify(students)
+);
 
-/* PREGUNTAS */
+}
+
+/* =========================
+   STORAGE RESULTADOS
+========================= */
+
+let results = JSON.parse(
+localStorage.getItem("results")
+) || [];
+
+/* =========================
+   BANCO PREGUNTAS
+========================= */
 
 const questionBank = [
 
@@ -255,7 +371,9 @@ answer:"Shopify"
 
 ];
 
-/* UTILIDADES */
+/* =========================
+   FUNCIONES VISUALES
+========================= */
 
 function hideAll(){
 
@@ -271,21 +389,27 @@ document.getElementById("finalResult").classList.add("hidden");
 function goHome(){
 
 hideAll();
-document.getElementById("home").classList.remove("hidden");
+
+document.getElementById("home")
+.classList.remove("hidden");
 
 }
 
 function showProfessor(){
 
 hideAll();
-document.getElementById("professorLogin").classList.remove("hidden");
+
+document.getElementById("professorLogin")
+.classList.remove("hidden");
 
 }
 
 function showStudent(){
 
 hideAll();
-document.getElementById("studentLogin").classList.remove("hidden");
+
+document.getElementById("studentLogin")
+.classList.remove("hidden");
 
 }
 
@@ -295,20 +419,30 @@ goHome();
 
 }
 
-/* LOGIN PROFESOR */
+/* =========================
+   LOGIN PROFESOR
+========================= */
 
 function loginProfessor(){
 
-const user = document.getElementById("profUser").value;
-const pass = document.getElementById("profPass").value;
+const user =
+document.getElementById("profUser").value.trim();
 
-if(user === professorUser && pass === professorPass){
+const pass =
+document.getElementById("profPass").value.trim();
+
+if(
+user === professorUser &&
+pass === professorPass
+){
 
 hideAll();
 
-document.getElementById("professorPanel").classList.remove("hidden");
+document.getElementById("professorPanel")
+.classList.remove("hidden");
 
 renderStudents();
+
 renderResults();
 
 }else{
@@ -319,73 +453,185 @@ alert("Credenciales incorrectas");
 
 }
 
-/* LISTA ALUMNOS */
+/* =========================
+   REGISTRAR ALUMNO
+========================= */
 
-function renderStudents(){
+function registerStudent(){
 
-const div = document.getElementById("studentList");
+const user =
+document.getElementById("studentName")
+.value.trim();
 
-div.innerHTML = "";
+const password =
+document.getElementById("studentPassword")
+.value.trim();
 
-students.forEach(s=>{
+if(user === "" || password === ""){
 
-div.innerHTML += `
-<div class="card">
-<b>Usuario:</b> ${s.user}<br>
-<b>Clave:</b> ${s.password}
-</div>
-`;
+alert("Complete todos los campos");
 
-});
+return;
 
 }
 
-/* RESULTADOS */
+const exists = students.find(
+s => s.user === user
+);
 
-function renderResults(){
+if(exists){
 
-const div = document.getElementById("results");
+alert("Alumno ya registrado");
 
-if(results.length === 0){
+return;
 
-div.innerHTML = "Sin resultados.";
+}
+
+students.push({
+
+user:user,
+password:password
+
+});
+
+localStorage.setItem(
+"students",
+JSON.stringify(students)
+);
+
+document.getElementById("studentName").value="";
+document.getElementById("studentPassword").value="";
+
+renderStudents();
+
+alert("Alumno registrado correctamente");
+
+}
+
+/* =========================
+   MOSTRAR ALUMNOS
+========================= */
+
+function renderStudents(){
+
+const div =
+document.getElementById("studentList");
+
+if(students.length === 0){
+
+div.innerHTML = "No hay alumnos";
+
 return;
 
 }
 
 div.innerHTML = "";
 
-results.forEach(r=>{
+students.forEach(s=>{
 
 div.innerHTML += `
+
 <div class="card">
-<b>Alumno:</b> ${r.student}<br>
-<b>Correctas:</b> ${r.correct}<br>
-<b>Nota:</b> ${r.score}/10
+
+<b>Usuario:</b> ${s.user}<br>
+
+<b>Clave:</b> ${s.password}
+
 </div>
+
 `;
 
 });
 
 }
 
-/* LOGIN ALUMNO */
+/* =========================
+   RESULTADOS
+========================= */
+
+function renderResults(){
+
+const div =
+document.getElementById("results");
+
+if(results.length === 0){
+
+div.innerHTML = "No existen resultados";
+
+return;
+
+}
+
+div.innerHTML = "";
+
+results.forEach((r,index)=>{
+
+div.innerHTML += `
+
+<div class="card">
+
+<b>Alumno:</b> ${r.student}<br>
+
+<b>Correctas:</b> ${r.correct}<br>
+
+<b>Nota:</b> ${r.score}/10<br><br>
+
+<button onclick="gradeStudent(${index})">
+
+Calificar Respuestas
+
+</button>
+
+</div>
+
+`;
+
+});
+
+}
+
+function gradeStudent(index){
+
+alert(
+
+"Alumno: " + results[index].student +
+
+"\nCorrectas: " + results[index].correct +
+
+"\nNota Final: " + results[index].score + "/10"
+
+);
+
+}
+
+/* =========================
+   LOGIN ALUMNO
+========================= */
 
 let currentStudent = "";
 let currentQuestions = [];
 
 function studentLogin(){
 
-const user = document.getElementById("studentUserLogin").value.trim();
-const pass = document.getElementById("studentPassLogin").value.trim();
+const user =
+document.getElementById("studentUserLogin")
+.value.trim();
+
+const pass =
+document.getElementById("studentPassLogin")
+.value.trim();
 
 const student = students.find(
-s => s.user === user && s.password === pass
+
+s => s.user === user &&
+s.password === pass
+
 );
 
 if(!student){
 
 alert("Usuario o clave incorrecta");
+
 return;
 
 }
@@ -396,15 +642,21 @@ startExam();
 
 }
 
-/* MEZCLAR */
+/* =========================
+   MEZCLAR
+========================= */
 
 function shuffle(array){
 
-return array.sort(()=>Math.random()-0.5);
+return array.sort(() =>
+Math.random() - 0.5
+);
 
 }
 
-/* TIMER */
+/* =========================
+   TIMER
+========================= */
 
 let timeLeft = 900;
 let timerInterval;
@@ -417,14 +669,20 @@ timeLeft = 900;
 
 timerInterval = setInterval(()=>{
 
-let minutes = Math.floor(timeLeft/60);
-let seconds = timeLeft%60;
+let minutes =
+Math.floor(timeLeft / 60);
+
+let seconds =
+timeLeft % 60;
 
 if(seconds < 10){
-seconds = "0"+seconds;
+
+seconds = "0" + seconds;
+
 }
 
-document.getElementById("timer").innerHTML =
+document.getElementById("timer")
+.innerHTML =
 minutes + ":" + seconds;
 
 timeLeft--;
@@ -443,37 +701,57 @@ submitExam();
 
 }
 
-/* EXAMEN */
+/* =========================
+   EXAMEN
+========================= */
 
 function startExam(){
 
 hideAll();
 
-document.getElementById("examSection").classList.remove("hidden");
+document.getElementById("examSection")
+.classList.remove("hidden");
 
-document.getElementById("studentExamName").innerHTML =
-"<h3>Alumno: "+currentStudent+"</h3>";
+document.getElementById("studentExamName")
+.innerHTML =
+"<h3>Alumno: " + currentStudent + "</h3>";
 
-currentQuestions = shuffle([...questionBank]).slice(0,5);
+currentQuestions =
+shuffle([...questionBank]).slice(0,5);
 
-const form = document.getElementById("examForm");
+const form =
+document.getElementById("examForm");
 
 form.innerHTML = "";
 
 currentQuestions.forEach((q,index)=>{
 
 let html = `
+
 <div class="question">
+
 <h3>${index+1}. ${q.q}</h3>
+
 `;
 
 shuffle([...q.options]).forEach(opt=>{
 
 html += `
+
 <label>
-<input type="radio" name="q${index}" value="${opt}">
+
+<input
+type="radio"
+name="q${index}"
+value="${opt}"
+>
+
 ${opt}
-</label><br><br>
+
+</label>
+
+<br><br>
+
 `;
 
 });
@@ -488,7 +766,9 @@ startTimer();
 
 }
 
-/* FINALIZAR */
+/* =========================
+   FINALIZAR EXAMEN
+========================= */
 
 function submitExam(){
 
@@ -498,7 +778,8 @@ let correct = 0;
 
 currentQuestions.forEach((q,index)=>{
 
-const ans = document.querySelector(
+const ans =
+document.querySelector(
 `input[name="q${index}"]:checked`
 );
 
@@ -510,28 +791,46 @@ correct++;
 
 });
 
-const score = ((correct/5)*10).toFixed(1);
+const score =
+((correct / 5) * 10).toFixed(1);
 
 results.push({
+
 student:currentStudent,
 correct:correct,
 score:score
+
 });
+
+localStorage.setItem(
+"results",
+JSON.stringify(results)
+);
 
 hideAll();
 
-document.getElementById("finalResult").classList.remove("hidden");
+document.getElementById("finalResult")
+.classList.remove("hidden");
 
-document.getElementById("scoreText").innerHTML =
-currentStudent + ", tu nota es: " + score + "/10";
+document.getElementById("scoreText")
+.innerHTML =
+
+currentStudent +
+", tu nota es: " +
+score +
+"/10";
 
 }
 
-/* SALIR */
+/* =========================
+   SALIR
+========================= */
 
 function studentExit(){
 
 clearInterval(timerInterval);
+
+alert("Sesión finalizada");
 
 goHome();
 
