@@ -1,8 +1,8 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Examen Wix y Shopify</title>
 
 <style>
@@ -45,7 +45,6 @@ background:#102a56;
 
 .logout{
 background:#c62828;
-float:right;
 }
 
 .logout:hover{
@@ -105,11 +104,8 @@ margin-bottom:20px;
 <div id="home">
 
 <center>
-
 <button onclick="showProfessor()">Profesor</button>
-
 <button onclick="showStudent()">Alumno</button>
-
 </center>
 
 </div>
@@ -119,11 +115,9 @@ margin-bottom:20px;
 <h2>Login Profesor</h2>
 
 <input type="text" id="profUser" placeholder="Usuario">
-
 <input type="password" id="profPass" placeholder="Clave">
 
 <button onclick="loginProfessor()">Ingresar</button>
-
 <button onclick="goHome()">Volver</button>
 
 </div>
@@ -132,34 +126,16 @@ margin-bottom:20px;
 
 <button class="logout" onclick="logout()">Salir</button>
 
-<h2>Panel del Profesor</h2>
+<h2>Panel Profesor</h2>
 
 <div class="card">
-
-<h3>Registrar Alumno</h3>
-
-<input type="text" id="studentName" placeholder="Usuario alumno">
-
-<input type="password" id="studentPassword" placeholder="Clave alumno">
-
-<button onclick="registerStudent()">Registrar Alumno</button>
-
-</div>
-
-<div class="card">
-
-<h3>Alumnos Registrados</h3>
-
+<h3>Alumnos disponibles</h3>
 <div id="studentList"></div>
-
 </div>
 
 <div class="card">
-
-<h3>Resultados y Calificaciones</h3>
-
+<h3>Resultados</h3>
 <div id="results"></div>
-
 </div>
 
 </div>
@@ -169,11 +145,9 @@ margin-bottom:20px;
 <h2>Login Alumno</h2>
 
 <input type="text" id="studentUserLogin" placeholder="Usuario">
-
 <input type="password" id="studentPassLogin" placeholder="Clave">
 
 <button onclick="studentLogin()">Ingresar</button>
-
 <button onclick="goHome()">Volver</button>
 
 </div>
@@ -189,11 +163,8 @@ margin-bottom:20px;
 <form id="examForm"></form>
 
 <center>
-
 <button onclick="submitExam()">Finalizar Examen</button>
-
 <button class="logout" onclick="studentExit()">Salir</button>
-
 </center>
 
 </div>
@@ -203,9 +174,7 @@ margin-bottom:20px;
 <div class="result" id="scoreText"></div>
 
 <center>
-
-<button onclick="goHome()">Volver al Inicio</button>
-
+<button onclick="goHome()">Volver</button>
 </center>
 
 </div>
@@ -214,11 +183,25 @@ margin-bottom:20px;
 
 <script>
 
+/* LOGIN PROFESOR */
+
 const professorUser = "profesor";
 const professorPass = "profesor123";
 
-let students = JSON.parse(localStorage.getItem("students")) || [];
-let results = JSON.parse(localStorage.getItem("results")) || [];
+/* ALUMNOS FIJOS */
+
+const students = [
+
+{ user:"alumno1", password:"1234" },
+{ user:"alumno2", password:"1234" },
+{ user:"alumno3", password:"1234" },
+{ user:"alumno4", password:"1234" }
+
+];
+
+let results = [];
+
+/* PREGUNTAS */
 
 const questionBank = [
 
@@ -272,6 +255,8 @@ answer:"Shopify"
 
 ];
 
+/* UTILIDADES */
+
 function hideAll(){
 
 document.getElementById("home").classList.add("hidden");
@@ -286,7 +271,6 @@ document.getElementById("finalResult").classList.add("hidden");
 function goHome(){
 
 hideAll();
-
 document.getElementById("home").classList.remove("hidden");
 
 }
@@ -294,7 +278,6 @@ document.getElementById("home").classList.remove("hidden");
 function showProfessor(){
 
 hideAll();
-
 document.getElementById("professorLogin").classList.remove("hidden");
 
 }
@@ -302,7 +285,6 @@ document.getElementById("professorLogin").classList.remove("hidden");
 function showStudent(){
 
 hideAll();
-
 document.getElementById("studentLogin").classList.remove("hidden");
 
 }
@@ -312,6 +294,8 @@ function logout(){
 goHome();
 
 }
+
+/* LOGIN PROFESOR */
 
 function loginProfessor(){
 
@@ -325,7 +309,6 @@ hideAll();
 document.getElementById("professorPanel").classList.remove("hidden");
 
 renderStudents();
-
 renderResults();
 
 }else{
@@ -336,64 +319,11 @@ alert("Credenciales incorrectas");
 
 }
 
-function registerStudent(){
-
-const user = document.getElementById("studentName").value.trim();
-const password = document.getElementById("studentPassword").value.trim();
-
-if(students.length >= 4){
-
-alert("Máximo 4 alumnos.");
-
-return;
-
-}
-
-if(user === "" || password === ""){
-
-alert("Complete todos los campos.");
-
-return;
-
-}
-
-const exists = students.find(s => s.user === user);
-
-if(exists){
-
-alert("Alumno ya registrado.");
-
-return;
-
-}
-
-students.push({
-user:user,
-password:password
-});
-
-localStorage.setItem("students", JSON.stringify(students));
-
-document.getElementById("studentName").value = "";
-document.getElementById("studentPassword").value = "";
-
-renderStudents();
-
-alert("Alumno registrado.");
-
-}
+/* LISTA ALUMNOS */
 
 function renderStudents(){
 
 const div = document.getElementById("studentList");
-
-if(students.length === 0){
-
-div.innerHTML = "No hay alumnos.";
-
-return;
-
-}
 
 div.innerHTML = "";
 
@@ -410,32 +340,28 @@ div.innerHTML += `
 
 }
 
+/* RESULTADOS */
+
 function renderResults(){
 
 const div = document.getElementById("results");
 
 if(results.length === 0){
 
-div.innerHTML = "No existen resultados.";
-
+div.innerHTML = "Sin resultados.";
 return;
 
 }
 
 div.innerHTML = "";
 
-results.forEach((r,index)=>{
+results.forEach(r=>{
 
 div.innerHTML += `
 <div class="card">
 <b>Alumno:</b> ${r.student}<br>
 <b>Correctas:</b> ${r.correct}<br>
-<b>Nota:</b> ${r.score}/10<br><br>
-
-<button onclick="gradeStudent(${index})">
-Calificar Respuestas
-</button>
-
+<b>Nota:</b> ${r.score}/10
 </div>
 `;
 
@@ -443,36 +369,23 @@ Calificar Respuestas
 
 }
 
-function gradeStudent(index){
-
-alert(
-"Alumno: " + results[index].student +
-"\nCorrectas: " + results[index].correct +
-"\nNota Final: " + results[index].score + "/10"
-);
-
-}
+/* LOGIN ALUMNO */
 
 let currentStudent = "";
 let currentQuestions = [];
 
-function shuffle(array){
-
-return array.sort(()=>Math.random()-0.5);
-
-}
-
 function studentLogin(){
 
-const user = document.getElementById("studentUserLogin").value;
-const pass = document.getElementById("studentPassLogin").value;
+const user = document.getElementById("studentUserLogin").value.trim();
+const pass = document.getElementById("studentPassLogin").value.trim();
 
-const student = students.find(s => s.user === user && s.password === pass);
+const student = students.find(
+s => s.user === user && s.password === pass
+);
 
 if(!student){
 
-alert("Usuario o clave incorrecta.");
-
+alert("Usuario o clave incorrecta");
 return;
 
 }
@@ -482,6 +395,16 @@ currentStudent = student.user;
 startExam();
 
 }
+
+/* MEZCLAR */
+
+function shuffle(array){
+
+return array.sort(()=>Math.random()-0.5);
+
+}
+
+/* TIMER */
 
 let timeLeft = 900;
 let timerInterval;
@@ -494,11 +417,11 @@ timeLeft = 900;
 
 timerInterval = setInterval(()=>{
 
-let minutes = Math.floor(timeLeft / 60);
-let seconds = timeLeft % 60;
+let minutes = Math.floor(timeLeft/60);
+let seconds = timeLeft%60;
 
 if(seconds < 10){
-seconds = "0" + seconds;
+seconds = "0"+seconds;
 }
 
 document.getElementById("timer").innerHTML =
@@ -510,7 +433,7 @@ if(timeLeft < 0){
 
 clearInterval(timerInterval);
 
-alert("Tiempo terminado.");
+alert("Tiempo terminado");
 
 submitExam();
 
@@ -520,6 +443,8 @@ submitExam();
 
 }
 
+/* EXAMEN */
+
 function startExam(){
 
 hideAll();
@@ -527,7 +452,7 @@ hideAll();
 document.getElementById("examSection").classList.remove("hidden");
 
 document.getElementById("studentExamName").innerHTML =
-"<h3>Alumno: " + currentStudent + "</h3>";
+"<h3>Alumno: "+currentStudent+"</h3>";
 
 currentQuestions = shuffle([...questionBank]).slice(0,5);
 
@@ -563,6 +488,8 @@ startTimer();
 
 }
 
+/* FINALIZAR */
+
 function submitExam(){
 
 clearInterval(timerInterval);
@@ -571,7 +498,9 @@ let correct = 0;
 
 currentQuestions.forEach((q,index)=>{
 
-const ans = document.querySelector(`input[name="q${index}"]:checked`);
+const ans = document.querySelector(
+`input[name="q${index}"]:checked`
+);
 
 if(ans && ans.value === q.answer){
 
@@ -589,8 +518,6 @@ correct:correct,
 score:score
 });
 
-localStorage.setItem("results", JSON.stringify(results));
-
 hideAll();
 
 document.getElementById("finalResult").classList.remove("hidden");
@@ -600,11 +527,11 @@ currentStudent + ", tu nota es: " + score + "/10";
 
 }
 
+/* SALIR */
+
 function studentExit(){
 
 clearInterval(timerInterval);
-
-alert("Sesión finalizada.");
 
 goHome();
 
